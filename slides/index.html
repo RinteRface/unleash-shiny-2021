@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Unleash Shiny</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Granjon (Novartis) &amp; John Coene (Opifex)" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link href="libs/js4shiny-0.0.28/css/_variables-fonts.css" rel="stylesheet" />
+    <link href="libs/js4shiny-0.0.28/css/_variables.css" rel="stylesheet" />
+    <link href="libs/js4shiny-0.0.28/css/code.css" rel="stylesheet" />
+    <link href="libs/js4shiny-0.0.28/jsonview/jsonview.css" rel="stylesheet" />
+    <script src="libs/js4shiny-0.0.28/jsonview/jsonview.min.js"></script>
+    <link href="libs/js4shiny-redirectConsoleLog-0.0.28/jslog.css" rel="stylesheet" />
+    <script src="libs/js4shiny-redirectConsoleLog-0.0.28/redirectConsoleLog.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Unleash Shiny
+## R/Pharma - Advanced Shiny Workshop
+### David Granjon (Novartis) &amp; John Coene (Opifex)
+### 10-10-2021
+
+---
+
+
+&lt;style&gt;
+.title-slide {
+  background-image: url(assets/img/bg/front_cover.jpg);
+  background-size: cover;
+}
+&lt;/style&gt;
+
+
+
+
+
+# About us
+
+.flex.tc[
+.w-30.mr3[
+&lt;img class="br-100" src="assets/img/people/david.jpg" /&gt;
+.f5[David]
+
+.small[Data Scientist at Novartis]
+
+.gray[&amp;commat;divadnojnarg]
+]
+
+.w-30.mr3[
+&lt;img class="br-100" src="assets/img/people/john.jpg" /&gt;
+.f5[John]
+
+.small[Software Engineer at Opifex]
+
+.gray[&amp;commat;jdatap]
+]
+
+]
+
+---
+
+# Program
+
+We're in for 2 hours of **fun**!
+
+- Grab a ☕
+- Make yourself comfortable 🛋 or 🧘
+- Ask questions ❓  
+
+1. Introduction 				5  min
+2. Bundling with packer 10 min
+3. R model 							5  min
+4. _Break_ 							5  min
+5. Project Setup 				30 min
+6. Framework 7 					30 min
+7. _Break_ 							5  min
+8. Echarts.js 					15 min
+9. Questions
+
+---
+
+# Workshop Material
+
+- Slides: [rinterface.com/shiny/talks/RPharma2021](https://rinterface.com/shiny/talks/RPharma2021)
+- For a plug and play experience, we created a [Rstudio Cloud](https://rstudio.cloud/spaces/92568/join?access_code=kqUUGAOZMMHSZoAQBrQ1GHSOBxSE4u1q8JvrJoRs) project with everything installed for you
+
+.center[
+https://rstudio.cloud/spaces/92568/join?access_code=kqUUGAOZMMHSZoAQBrQ1GHSOBxSE4u1q8JvrJoRs
+]
+  
+- To avoid **connection issues**, disconnect from your **VPN**!
+- Somes slides contain code that you may run (a **sandbox** space is available in RStudio Cloud)
+
+&lt;img src="assets/img/rstudio_cloud_project.jpg" width="100%" /&gt;
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Introduction
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Bundling with packer
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+R Model
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Break!
+&lt;/h3&gt;
+
+&lt;p class='absolute white' style='bottom:2rem;'&gt;
+See you in 5 minutes.
+&lt;/p&gt;
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Project Setup
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Framework 7
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Break!
+&lt;/h3&gt;
+
+&lt;p class='absolute white' style='bottom:2rem;'&gt;
+See you in 5 minutes.
+&lt;/p&gt;
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Echarts.js
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+---
+class: break center middle
+background-image: url('assets/img/bg/part1.jpg')
+background-size: cover
+
+&lt;h3 class="white absolute bottom center"&gt;
+Questions?
+&lt;/h3&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "docco",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<script>
+  (function (d) {
+    d.addEventListener('DOMContentLoaded', function () {
+      // find code chunks that get special colors
+      const langSpecial = ['r', 'js', 'yaml', 'json', 'bash', 'html', 'css']
+      const codeSpecial = d.querySelectorAll(langSpecial.map(l => 'pre code.' + l))
+
+      // find code chunks with highlighted lines
+      const hlines = d.querySelectorAll('.remark-code-line-highlighted')
+      const preHLParents = []
+
+      const findPreParent = function (line, p = 0) {
+        if (p > 1) return null // traverse up no further than grandparent
+        const el = line.parentElement
+        if (el.tagName === 'PRE') {
+          return el
+        } else {
+          return findPreParent(el, ++p)
+        }
+      }
+
+      // add the code language to the parent <pre> element
+      for (const code of codeSpecial) {
+        const pre = findPreParent(code)
+        const codeLang = code.className.split(' ').filter(c => langSpecial.includes(c))
+        pre.classList += ` ${codeLang}`
+      }
+
+      // add remark-code-has-line-highlighted to parent <pre> element
+      for (const line of hlines) {
+        const pre = findPreParent(line)
+        if (pre && !preHLParents.includes(pre)) preHLParents.push(pre)
+      }
+      preHLParents.forEach(p => p.classList += ' remark-code-has-line-highlighted')
+
+      slideshow.on('afterShowSlide', function (slide) {
+        replaceIframePlaceholders()
+      })
+
+      replaceIframePlaceholders()
+    })
+  })(document)
+
+function replaceIframePlaceholders () {
+  document
+  .querySelectorAll('.remark-slides-area .remark-visible div[data-iframe]')
+  .forEach(el => replaceIframePlaceholder(el))
+}
+
+function replaceIframePlaceholder (el) {
+  const iframe = document.createElement('iframe')
+  if (el.childNodes) {
+    el.childNodes.forEach(e => iframe.appendChild(e))
+  }
+  iframe.src = el.dataset.src
+  iframe.classList = el.classList
+  el.parentElement.replaceChild(iframe, el)
+}
+</script>
+  <style>
+  .remark-code-has-line-highlighted .remark-code-line:not(.remark-code-line-highlighted) {
+    opacity: 0.4;
+  }
+
+.remark-code-line-highlighted {
+  background-color: inherit; /* Override highlight color */
+    /* font-weight: 500; */
+}
+
+/* Line Hover Indicator */
+  .remark-code-line:hover {
+    font-weight: bold;
+    opacity: 1 !important;
+  }
+
+.remark-code-line:hover:before {
+  content: "\25B6";
+  color: #6d7e8a;
+    position: absolute;
+  transform: translateX(-1.2em);
+  animation: hover 0.66s alternate 8 cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+@keyframes hover {
+  0% {
+    transform: translateX(-1.2em);
+  }
+  100% {
+    transform: translateX(-0.8em);
+  }
+}
+</style>
+<script type='text/javascript'>
+
+var slideElements
+
+  function getElementForSlide(slide) {
+    slideElements = slideElements || document.querySelectorAll('.remark-slide')
+    return slideElements[slide.getSlideIndex()]
+  }
+
+  slideshow.on('showSlide', function (slide) {
+    Array.from(getElementForSlide(slide).querySelectorAll('video, audio')).forEach(function (vid) {
+      vid.loop = false
+      vid.currentTime = 0
+      vid.play()
+    })
+  })
+
+  slideshow.on('hideSlide', function (slide) {
+    Array.from(getElementForSlide(slide).querySelectorAll('video, audio')).forEach(function (vid) {
+      vid.pause()
+    })
+  })
+
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'FALSE';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
