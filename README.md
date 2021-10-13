@@ -12,8 +12,8 @@ R/Pharma workshop (2hours)
 1. Introduction 				5  min
 2. Bundling with packer 10 min
 3. R model 							5  min
-4. _Break_ 							5  min
-5. Project Setup 				30 min
+4. Project Setup 				30 min
+5. _Break_ 							5  min
 6. Framework 7 					30 min
 7. _Break_ 							5  min
 8. Echarts.js 					15 min

@@ -14,7 +14,7 @@ h2,
 h3 {
   font-family: 'Nunito Sans', -apple-system, avenir next, avenir, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
   font-weight: normal;
-  color: #674a80;
+  color: #0a9396;
 }
 
 .remark-slide-content {
@@ -48,8 +48,12 @@ h3 {
   font-size: 0.9em;
 }
 
+.primary{
+  color: #0a9396;
+}
+
 .remark-inline-code {
-  color: #59406d;
+  color: #0a9396;
   background-color: #46668310;
   padding: 2px;
   font-size: 1em;
@@ -101,7 +105,7 @@ a>code {
 }
 
 .title-slide {
-  background-color: #674a80;
+  background-color: #0a9396;
 }
 
 .title-slide .remark-slide-number {
@@ -122,7 +126,7 @@ a>code {
 
 .left-column h2:last-of-type,
 .left-column h3:last-child {
-  color: #674a80;
+  color: #0a9396;
 }
 
 .right-column {
@@ -234,7 +238,7 @@ table.dataTable.display tbody tr:hover {
   top: 0;
   left: 0;
   width: 100%;
-  background: #674a80;
+  background: #0a9396;
   color: #ffffff;
   padding: 26px 26px 26px 78px;
   margin-top: 0;

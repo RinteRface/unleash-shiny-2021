@@ -86,8 +86,8 @@ We're in for 2 hours of **fun**!
 1. Introduction 				5  min
 2. Bundling with packer 10 min
 3. R model 							5  min
-4. _Break_ 							5  min
-5. Project Setup 				30 min
+4. Project Setup 				30 min
+5. _Break_ 							5  min
 6. Framework 7 					30 min
 7. _Break_ 							5  min
 8. Echarts.js 					15 min
@@ -113,10 +113,10 @@ knitr::include_graphics("assets/img/rstudio_cloud_project.jpg")
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/intro.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Introduction
 </h3>
 
@@ -127,11 +127,11 @@ class: header_background
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/packer.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
-Bundling with packer
+<h3 class="primary absolute bottom center">
+Bundling
 </h3>
 
 ---
@@ -141,10 +141,10 @@ class: header_background
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/model.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 R Model
 </h3>
 
@@ -155,23 +155,23 @@ class: header_background
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/break.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Break!
 </h3>
 
-<p class='absolute white' style='bottom:2rem;'>
+<p class='primary absolute white' style='bottom:2rem;'>
 See you in 5 minutes.
 </p>
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/setup.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Project Setup
 </h3>
 
@@ -182,10 +182,10 @@ class: header_background
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/f7.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Framework 7
 </h3>
 
@@ -196,23 +196,23 @@ class: header_background
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/break.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Break!
 </h3>
 
-<p class='absolute white' style='bottom:2rem;'>
+<p class='primary absolute white' style='bottom:2rem;'>
 See you in 5 minutes.
 </p>
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/echarts.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Echarts.js
 </h3>
 
@@ -223,9 +223,9 @@ class: header_background
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/part1.jpg')
+background-image: url('assets/img/bg/question.png')
 background-size: cover
 
-<h3 class="white absolute bottom center">
+<h3 class="primary absolute bottom center">
 Questions?
 </h3>
