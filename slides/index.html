@@ -47,8 +47,8 @@ class: center, middle, inverse, title-slide
 # About us
 
 .flex.tc[
-.w-30.mr3[
-&lt;img class="br-100" src="assets/img/people/david.jpg" /&gt;
+.w-50.mr3[
+&lt;img class="br-100" src="assets/img/people/david.jpg" height=400 /&gt;
 .f5[David]
 
 .small[Data Scientist at Novartis]
@@ -56,8 +56,8 @@ class: center, middle, inverse, title-slide
 .gray[&amp;commat;divadnojnarg]
 ]
 
-.w-30.mr3[
-&lt;img class="br-100" src="assets/img/people/john.jpg" /&gt;
+.w-50.mr3[
+&lt;img class="br-100" src="assets/img/people/john.jpg"  height=400/&gt;
 .f5[John]
 
 .small[Software Engineer at Opifex]
@@ -83,9 +83,8 @@ We're in for 2 hours of **fun**!
 4. Project Setup 				30 min
 5. _Break_ 							5  min
 6. Framework 7 					30 min
-7. _Break_ 							5  min
-8. Echarts.js 					15 min
-9. Questions
+7. Echarts.js 					15 min
+8. Questions
 
 ---
 
@@ -122,14 +121,221 @@ class: break center middle
 background-image: url('assets/img/bg/packer.png')
 background-size: cover
 
-&lt;h3 class="primary absolute bottom center"&gt;
-Bundling
+&lt;h3 class="primary" style="position:absolute;top:1rem;"&gt;
+Managing JavaScript
 &lt;/h3&gt;
 
 ---
 class: header_background
 
-# Intro
+## Pre-processing JavaScript
+
+### Why?
+### What?
+
+---
+
+# Code Management
+
+Large projects are complex, the developer needs help
+
+Use something that enforces good practice and project
+structure.
+
+.pull-left[
+__In R__
+
+- Build a package
+- Use [drake](https://github.com/ropensci/drake)
+- Use [targets](https://github.com/wlandau/targets)
+
+]
+
+.pull-right[
+__In JavaScript__
+
+There is nothing such---built-in---we work with loose collections
+of files.
+]
+
+---
+class: center
+
+# Browser Support
+
+✅ R code written in `4.0.0` will (likely) run on `3.0.0`+
+
+💀 JavaScript not so much.
+
+![[caniuse.com](https://caniuse.com/?search=ES6)](assets/img/es6.png)
+
+ES6 [released June 2016](https://en.wikipedia.org/wiki/ECMAScript)
+
+---
+# Code Size
+
+Code size matters in JavaScript: the smaller the file the faster it loads.
+
+.pull-left[
+
+### Input
+
+Can be written and read by a human.
+
+```js
+function addOne(xyz){
+  return xyz + 1;
+}
+
+addOne(2);
+```
+]
+
+.pull-right[
+
+###  Minified
+
+Loads faster but can't be written or read by a human.
+
+```js
+function addOne(n){return n+1}addOne(2);
+```
+]
+
+---
+
+## Conclusion
+
+We need to pre-process the code to:
+
+- Minify it for performances
+- Transpile to ensure it runs an (nearly) all browsers
+- Be able to setup code management
+
+It does not end here.
+
+_Pre-processing enables even more._
+
+---
+
+# Dependency Management
+
+No packages system with JavaScript but there is one
+for node.js---Node's Package Manager (NPM)---that 
+can be used when __preprocessing__ the code.
+
+.pull-left[
+__MANUAL__
+```html
+&lt;script src="file1.js"&gt;&lt;/script&gt;
+&lt;script src="file2.js"&gt;&lt;/script&gt;
+&lt;script src="file3.js"&gt;&lt;/script&gt;
+```
+
+👎 Difficult to manage.
+]
+
+.pull-right[
+__NPM__
+
+```bash
+npm install dplyr
+```
+
+then
+
+
+```js
+import { mutate } from 'dplyr';
+```
+
+👍 Easy to manage.
+]
+
+---
+class: center
+
+## Tree-shaking
+
+Checking for dead variables.
+
+## Code checks
+
+Discover errors when you write the code, not when you run it.
+
+__And so much more...__
+
+---
+class: header_background
+
+## Downside
+
+1. There are a variety of tools to do the job (webpack, Grunt, Parcel, etc.)
+2. They are generally difficult to set up.
+3. They're not designed to work with R in mind.
+
+---
+class: center
+# Meet packer!
+
+&lt;img src="https://packer.john-coene.com/_media/packer.png" height="200px" /&gt;
+
+[packer.john-coene.com](https://packer.john-coene.com/)
+
+---
+class: center, centerize
+# Principles
+
+Anything packer-related takes places in a 📦
+
+__Does not__ become a dependency to what you're building 
+
+It aspires to be a specialised {[usethis](https://usethis.r-lib.org/)}:
+
+automate tasks when building packages __with JavaScript.__
+---
+class: header_background
+
+# Using packer
+
+Set it up first.
+
+1. Create a package (or {[golem](https://golemverse.org/)} app)
+2. Scaffold 
+
+Then write some code and bundle with `packer::bundle()`,
+which produces the JavaScript code.
+
+---
+# Scaffolds?
+
+Scaffolds are central to packer. They create the necessary structure to use webpack and npm __with R.__
+
+- Golem - use packer with {golem}
+- Htmlwidgets - use packer to create {htmlwidgets}
+- Extensions - create shiny extensions (handlers)
+- Inputs - create custom inputs
+- Outputs - create custom outputs
+- And a few more.
+
+e.g.: 
+
+```r
+packer::scaffold_golem()
+```
+
+_The term "scaffold" was blatantly stolen from `htmlwidgets::scaffoldWidget`._
+
+---
+class: center, centerize
+
+# Bundle?
+
+Source code is written in `/srcjs` and is bundled to `/inst`
+
+```r
+packer::bundle()
+```
 
 ---
 class: break center middle

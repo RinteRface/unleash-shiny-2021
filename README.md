@@ -15,9 +15,8 @@ R/Pharma workshop (2hours)
 4. Project Setup 				30 min
 5. _Break_ 							5  min
 6. Framework 7 					30 min
-7. _Break_ 							5  min
-8. Echarts.js 					15 min
-9. Questions
+7. Echarts.js 					15 min
+8. Questions
 
 ## Slides
 
