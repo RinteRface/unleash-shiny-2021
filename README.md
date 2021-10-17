@@ -18,10 +18,6 @@ R/Pharma workshop (2hours)
 7. Echarts.js 					15 min
 8. Questions
 
-## Slides
-
-Slides are hosted [here](https://rinterface.com/shiny/talks/RPharma2021/).
-
 ## Resources
 
 - [Outstanding Shiny UI](https://divadnojnarg.github.io/outstanding-shiny-ui/)
