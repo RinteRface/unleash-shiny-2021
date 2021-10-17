@@ -1,0 +1,25 @@
+Package: unleash.workshop
+Title: Material for the 'Unleash Shiny' Workshop
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "John",
+           family = "Coene",
+           role = c("aut", "cre"),
+           email = "jcoenep@gmail.com"),
+    person(given = "David",
+           family = "Granjon",
+           role = "aut",
+           email = "dgranjon@ymail.com"),
+		person(family = "RinteRface", role = "cph"))
+Description: Material for the 'Unleash Shiny' workshop.
+License: MIT + file LICENSE
+Imports: 
+	config (>= 0.3.1),
+	golem (>= 0.3.1),
+	shiny (>= 1.6.0),
+	packer (>= 0.1.2)
+Remotes:
+	JohnCoene/packer
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
