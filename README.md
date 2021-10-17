@@ -2,6 +2,32 @@
 
 R/Pharma workshop (2hours)
 
+## Get Started
+
+Clone this repository with the RStudio IDE or via the 
+command line.
+
+```bash
+git clone https://github.com/RinteRface/unleash-shiny-2021.git
+cd unleash-shiny-2021
+```
+
+Then run `renv::restore()` to install the dependencies.
+
+Importantly, this workshop makes heavy use of npm
+(Node's Package Manager), it comes with the installation of
+node.js.
+
+- You can manually install node.js: 
+[nodejs.org/en/download/](https://nodejs.org/en/download/)
+- You can also use package managers:
+[nodejs.org/en/download/package-manager/](https://nodejs.org/en/download/package-manager/)
+
+## Slides
+
+Slides are hosted [here](https://rinterface.com/shiny/talks/RPharma2021/).
+
+
 ## Requirements
 
 - Shiny and package development
