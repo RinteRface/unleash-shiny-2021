@@ -17,7 +17,7 @@ Imports:
 	config (>= 0.3.1),
 	golem (>= 0.3.1),
 	shiny (>= 1.6.0),
-	packer (>= 0.1.2)
+	packer (>= 0.1.2.9000)
 Remotes:
 	JohnCoene/packer
 Encoding: UTF-8
