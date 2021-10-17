@@ -6,7 +6,11 @@ date: "10-10-2021"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: ["assets/css/style.css", "assets/css/xaringan-extra.css"]
+    css: [
+      "assets/css/style.css", 
+      "assets/css/xaringan-extra.css",
+      "assets/css/custom.css"
+    ]
     includes:
       after_body: assets/html/includes.html
     mathjax: false
@@ -399,6 +403,162 @@ Framework 7
 class: header_background
 
 # Intro
+
+<br>
+
+.pull-left[
+- First class mobile template for the web.
+- Native look and feel for iOS and Android
+- Progressiv web app (PWA) support.
+- ... also works for desktop apps 😏
+]
+
+.pull-right[
+```{r framework7-logo, echo = FALSE, out.width='100%'}
+knitr::include_graphics("assets/img/framework7.svg")
+```
+]
+
+
+---
+
+# Demo
+
+.pull-left[
+<div class="md-iphone-5 md-black-device" id="singleLayoutDemo" style="font-size: 0.5em; margin-top: -50px !important;">
+<div class="md-body">
+<div class="md-buttons"></div>
+<div class="md-front-camera"></div>
+<div class="md-top-speaker"></div>
+<div class="md-screen">
+<iframe width="100%" src="https://framework7.io/kitchen-sink/core/?theme=ios" allowfullscreen="" frameborder="0" scrolling="no" height="470px"></iframe>
+</div>
+<button class="md-home-button"></button>
+</div>
+</div>
+]
+
+.pull-right[
+<div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; margin-top: -50px !important; display: none;">
+<div class="md-body">
+<div class="md-buttons"></div>
+<div class="md-front-camera"></div>
+<div class="md-top-speaker"></div>
+<div class="md-screen">
+<iframe width="100%" src="https://appstore-f7-react.vercel.app/" allowfullscreen="" frameborder="0" scrolling="no" height="470px"></iframe>
+</div>
+<button class="md-home-button"></button>
+</div>
+</div>
+]
+
+---
+
+# Import Framework7
+
+Inside the main `srcjs/index.js` we find:
+
+```js
+// Import Framework7
+import Framework7 from 'framework7';
+// Import Framework7 Styles
+import 'framework7/framework7-bundle.min.css';
+// Install F7 Components using .use() method on class:
+import Range from 'framework7/esm/components/range/range.js';
+import Toast from 'framework7/esm/components/toast/toast.js';
+Framework7.use([Range, Toast]);
+```
+
+---
+
+# Layout basics
+
+.pull-left[
+Framework7 requires: 
+- `index.html`.
+- `<div id="app"></div>` is the app root.
+- `index.js` the script generated with `{packer}`.
+- All of this happens in __app_ui.R__.
+- `golem_add_external_resources()` was tweaked ...
+]
+
+.small.pull-right[
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Head content ... -->
+  </head>
+  <body>
+    <!-- App root element ... -->
+    <div id="app"></div>
+  
+    <!-- Path to Framework7 JS-->
+    <script type="text/javascript" src="www/index.js"></script>
+  </body>
+</html>
+```
+]
+
+---
+
+# App template
+
+.pull-left[
+The most simple layout is composed of:
+- A single view.
+- A page with navbar, toolbar and page content.
+]
+
+.small.pull-right[
+```html
+<div id="app">
+  <div class="view view-main view-init safe-areas">
+    <div class="page">
+      <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner">
+          <div class="title">Title</div>
+        </div>
+      </div>
+      <div class="toolbar toolbar-bottom">
+        <div class="toolbar-inner">
+          <a href="#" >Link 1</a>
+          <a href="#" >Link 2</a>
+        </div>
+      </div>
+      <div class="page-content"></div>
+    </div>
+  </div>
+</div>
+```
+]
+
+---
+
+# Initialize App instance
+
+Inside `srcjs/index.js`, we initialize the app:
+
+```js
+// ... Other imports ...
+
+import App from './components/app.f7.jsx';
+let app = new Framework7({
+  el: '#app',
+  theme: 'ios',
+  // specify main app component
+  component: App
+});
+```
+
+---
+
+# JSX
+
+- JSX: mix HTML and JavaScript code in the same file.
+- `file.f7.jsx`.
+
 
 ---
 class: break center middle
