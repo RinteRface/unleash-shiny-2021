@@ -88,31 +88,34 @@ We're in for 2 hours of **fun**!
 - Ask questions `r ji("question")`  
 
 1. Introduction 				5  min
-2. Bundling with packer 10 min
-3. R model 							5  min
-4. Project Setup 				30 min
-5. _Break_ 							5  min
-6. Framework 7 					30 min
-7. Echarts.js 					15 min
-8. Questions
+2. Bundling with packer 15 min
+3. Project Setup 				10 min
+4. _Break_ 							5  min
+5. Framework 7 					30 min
+6. _Break_ 							5  min
+7. R model 							5  min
+8. Echarts.js 					Homework
+9. Questions
 
 ---
 
 # Workshop Material
 
 - Slides: [rinterface.com/shiny/talks/RPharma2021](https://rinterface.com/shiny/talks/RPharma2021)
-- For a plug and play experience, we created a [Rstudio Cloud](https://rstudio.cloud/spaces/92568/join?access_code=kqUUGAOZMMHSZoAQBrQ1GHSOBxSE4u1q8JvrJoRs) project with everything installed for you
 
-.center[
-https://rstudio.cloud/spaces/92568/join?access_code=kqUUGAOZMMHSZoAQBrQ1GHSOBxSE4u1q8JvrJoRs
-]
-  
-- To avoid **connection issues**, disconnect from your **VPN**!
-- Somes slides contain code that you may run (a **sandbox** space is available in RStudio Cloud)
+Clone this repository with the RStudio IDE or via the command line.
 
-```{r rstudio-cloud-init, echo=FALSE, out.width='100%'}
-knitr::include_graphics("assets/img/rstudio_cloud_project.jpg")
+```shell
+git clone https://github.com/RinteRface/unleash-shiny-2021.git
+cd unleash-shiny-2021
 ```
+
+Then run `renv::restore()` to install the dependencies.
+
+Importantly, this workshop makes heavy use of npm (Node's Package Manager), it comes with the installation of node.js:
+
+- You can manually install node.js: nodejs.org/en/download/.
+- You can also use package managers: nodejs.org/en/download/package-manager/.
 
 ---
 class: break center middle
@@ -128,8 +131,8 @@ class: header_background
 
 # Intro
 
-- Developing custom design for Shiny takes (too much) time ...
-- `{shinyMobile}` development took about 2 years ...
+- Developing custom design for Shiny takes __too much__ time ...
+- `{shinyMobile}` development `>=` 2 years ...
 - What if you are already know a bit of HTML/CSS/JS?
 - Relies on existing web templates to save time.
 - Focus on app features.
@@ -370,17 +373,61 @@ packer::bundle()
 
 ---
 class: break center middle
-background-image: url('assets/img/bg/model.png')
+background-image: url('assets/img/bg/setup.png')
 background-size: cover
 
 <h3 class="primary absolute bottom center">
-R Model
+Project Setup
 </h3>
 
 ---
 class: header_background
 
 # Intro
+
+- Develop a simple app utilizing a very famous web template (Framework7). 
+- This app will consist in:
+  - A slider range controlling ...
+  - Produce a visualization powered by echarts JS library. 
+
+---
+
+# Scaffold Framework7 🚀🚀🚀
+
+.pull-left[
+We call:
+
+```r
+golem::create::golem("myApp")
+packer::scaffold_golem(framework7 = TRUE)
+```
+
+Sets a Framework7 compatible structure:
+  - npm dependencies.
+  - loaders for CSS, JS, JSX ...
+  - config for webpack.
+  - So that you don't have to worry too much.
+]
+
+.pull-right[
+```{r framework7-assets, echo = FALSE, out.width='100%'}
+knitr::include_graphics("assets/img/packer-f7-scaffold.png")
+```
+]
+
+
+---
+
+# Test it
+
+This is a very basic app but it work well.
+
+```r
+packer::bundle()
+devtools::load_all()
+run_app()
+```
+
 
 ---
 class: break center middle
@@ -394,47 +441,6 @@ Break!
 <p class='primary absolute white' style='bottom:2rem;'>
 See you in 5 minutes.
 </p>
-
----
-class: break center middle
-background-image: url('assets/img/bg/setup.png')
-background-size: cover
-
-<h3 class="primary absolute bottom center">
-Project Setup
-</h3>
-
----
-class: header_background
-
-# Intro
-
-You are going to develop a simple app utilizing a very famous web template (Framework7). 
-This app will consist in a slider range controlling ... to produce a visualization
-powered by echarts JS library ... TO REPHRASE LATER ...
-
----
-
-# Scaffold Framework7
-
-.pull-left[
-We call:
-
-```r
-golem::create::golem("myApp")
-packer::scaffold_golem(framework7 = TRUE)
-```
-This step:
-
-  - Sets a Framework7 compatible structure.
-  - Let's review it below.
-]
-
-.pull-right[
-```{r framework7-assets, echo = FALSE, out.width='100%'}
-knitr::include_graphics("assets/img/framework7-assets.png")
-```
-]
 
 
 ---
@@ -454,9 +460,9 @@ class: header_background
 <br>
 
 .pull-left[
-- First class mobile template for the web.
-- Native look and feel for iOS and Android
-- Progressiv web app (PWA) support.
+- First class __mobile__ template for the web.
+- __Native__ look and feel for iOS and Android
+- Progressive web app (PWA) support.
 - ... also works for desktop apps 😏
 ]
 
@@ -469,10 +475,8 @@ knitr::include_graphics("assets/img/framework7.svg")
 
 ---
 
-# Demo
-
 .pull-left[
-<div class="md-iphone-5 md-black-device" id="singleLayoutDemo" style="font-size: 0.5em; margin-top: -50px !important;">
+<div class="md-iphone-5 md-black-device" id="singleLayoutDemo" style="font-size: 0.5em; !important;">
 <div class="md-body">
 <div class="md-buttons"></div>
 <div class="md-front-camera"></div>
@@ -486,13 +490,13 @@ knitr::include_graphics("assets/img/framework7.svg")
 ]
 
 .pull-right[
-<div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; margin-top: -50px !important;">
+<div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; !important;">
 <div class="md-body">
 <div class="md-buttons"></div>
 <div class="md-front-camera"></div>
 <div class="md-top-speaker"></div>
 <div class="md-screen">
-<iframe width="100%" src="https://appstore-f7-react.vercel.app/" allowfullscreen="" frameborder="0" scrolling="no" height="470px"></iframe>
+<iframe width="100%" src="https://appstore-f7-react.vercel.app/" allowfullscreen="" frameborder="0" scrolling="no" height="465px"></iframe>
 </div>
 <button class="md-home-button"></button>
 </div>
@@ -501,39 +505,38 @@ knitr::include_graphics("assets/img/framework7.svg")
 
 ---
 
-# Import Framework7
+# Import Framework7 and CSS
 
-Inside the main `srcjs/framework7.js` we find:
+Inside the main `srcjs/framework7.js`.
 
-.small[
+.pull-left[
+- Notice how CSS is imported.
+- Requires style/css loaders.
+- __Modular__ approach: import only what is required.
+- __Lighter__ JS bundle.
+- __Faster__ app.
+]
+
+.small.pull-right[
 ```js
 // Import Framework7
 import Framework7 from 'framework7';
 // Import Framework7 Styles
-import 'framework7/framework7-bundle.min.css'; #<<
-// Install F7 Components using .use() method on class:
-import Range from 'framework7/esm/components/range/range.js';
-import Toast from 'framework7/esm/components/toast/toast.js';
-Framework7.use([Range, Toast]);
+import 'framework7/framework7-bundle.min.css';
 ```
 ]
-
-- Notice how CSS is imported (requires style/css loaders).
-- Modular approach (import only what is required).
-- Lighter JS bundle.
-- Faster app.
 
 
 ---
 
 # Layout basics
 
+This part is handled by __app_ui.R__. 
+
 .pull-left[
-Framework7 requires: 
-- `index.html`.
-- `<div id="app"></div>` is the app root.
+Framework7 requires an `index.html` script:
+- `<div id="app"></div>` is the app __root__ required for initialization.
 - `index.js` the script generated with `{packer}` after bundling.
-- All of this happens in __app_ui.R__.
 - `golem_add_external_resources()` fills the `<!-- Head content ... -->` .
 ]
 
@@ -561,8 +564,8 @@ Framework7 requires:
 
 .pull-left[
 The simplest Framework7 layout is composed of:
-- The __app__ wrapper with __unique id__.
-- A single view.
+- The __app__ wrapper with __unique id__ required for initialization.
+- A single auto initialized view.
 - A page with: 
   - navbar (top).
   - toolbar (bottom).
@@ -585,7 +588,7 @@ The simplest Framework7 layout is composed of:
 
 ---
 
-# JSX
+# HTML + JS: welcome JSX
 
 - __Combine__ HTML and JavaScript code in the same file.
 - Create __re-usable components__ in `<COMPONENT>.f7.jsx`.
@@ -594,8 +597,7 @@ The simplest Framework7 layout is composed of:
 .small.pull-left[
 With JSX
 ```jsx
-const List = () => {
-
+export default () => {
   const title = 'Hello World';
 
   return () => (
@@ -628,18 +630,15 @@ Same without JSX ... (too verbose and weird!)
 
 .pull-left[
 - Components have 2 default input parameters:
-  - props gather all user given inputs.
-  - context is a helper providing access to multiple tools:
+  - __props__ gather all passed __attributes__.
+  - __context__ is a helper providing access to multiple tools:
     - The app instance `$f7`.
-    - $update to programmatically re-render the component.
-    - ...
-- Components return a __render__ function. 
+    - More [here](https://framework7.io/docs/router-component.html#component-context).
+- Components must return a __render__ function. 
 - Components can be self-closed.
 ]
 
 .pull-right[
-`user` and `id` are attributes, props will contain both. 
-
 ```html
 <Component user="David" id="compo"/>
 ```
@@ -660,21 +659,16 @@ const Component = (props, context) {
 
 # Main app component
 
+`{packer}` created `app.f7.jsx`.
+
 .pull-left[
-- `{packer}` created `app.f7.jsx`.
-- Contains the main app layout.
-- Imports a sub component. 
-- Initializes the component. 
+- Contains the app layout as a __main__ component.
 ] 
 
 .xsmall.pull-right[
 ```jsx
-import { Widget, initializeWidget } from './widget.f7.jsx';
-
 export default (props, { $f7 }) => {
   const title = 'Hello World';
-  
-  initializeWidget($f7); // initialize the widget
   
   return () => (
     <div id="app">
@@ -683,7 +677,9 @@ export default (props, { $f7 }) => {
           <!-- navbar ... -->
           <!-- toolbar ... -->
           <div class="page-content">
-            <Widget label="A label"/> #<<
+            <div class="block strong">
+              Page Content
+            </div>
           </div>
         </div>
       </div>
@@ -696,103 +692,16 @@ export default (props, { $f7 }) => {
 
 ---
 
-# Widget element (1/3)
-
-.pull-left[
-- A range slider. 
-- Auto initialized component (`range-slider-init` class).
-- Event handler: on range drag, calls `getRangeValue`.
-]
-
-.xsmall.pull-right[
-```jsx
-const Widget = (props, { $f7, $update }) => {
-
-  return () => (
-    <div>
-      <div class="block-title">Widget label</div>
-      <div class="block">
-        <div
-          class="range-slider range-slider-init"
-          data-min="0"
-          data-min="0"
-          data-max="2"
-          data-step="0.1"
-          data-label="true"
-          data-value="0.1"
-          data-scale="true"
-          data-scale-steps="2"
-          data-scale-sub-steps="10"
-          id="slider"
-          onrangeChange={(e) => getRangeValue(e)}
-          ></div>
-      </div>  
-    </div>
-  )
-}
-```
-]
-
-
----
-
-# Widget element (2/3)
-
-.pull-left[
-- Recovers the range value.
-- Sends it to Shiny with `Shiny.setInputValue`. 
-]
-
-.pull-right[
-```js
-// Handle range change for ODE model computation
-const getRangeValue = (e) => {
-  const range = $f7.range.get(e.target);
-  Shiny.setInputValue(range.el.id + '_value', range.value);
-  $update();
-};
-```
-]
-
-
----
-
-# Widget element (3/3)
-
-.pull-left[
-- Also requires to give an initial value for Shiny.
-- `app` refers to the app instance, `$f7`.
-- Function called from top level App component. 
-- On the R side, we can access `input$slider_value`!
-]
-
-.pull-right[
-```js
-const initializeWidget = (app) => {
-  $(document).on('shiny:connected', () => {
-    // initial value
-    Shiny.setInputValue(
-        'slider_value', 
-        parseFloat($('#slider').attr('data-value'), 10), 
-        {priority: 'event'}
-    );
-  });
-}
-```
-]
-
-
----
-
 # Initialize App instance
 
+The remaining of `srcjs/framework7.js` initializes the app instance.
+
 .pull-left[
-Inside `srcjs/framework7.js`, we:
-  - import the main app component.
-  - Initialize the app instance.
+- import the main App component.
+- Initialize the app instance:
     - Target __app__ id.
     - Set custom theme.
-    - Plug the app component in the component slot.
+    - Plug the App component in the __component__ slot.
     - Many other options available ...
 ]
 
@@ -810,6 +719,249 @@ let app = new Framework7({
 ```
 ]
 
+---
+
+# About the Framework7 smartSelect
+
+It's time to add an extra component.
+
+.pull-left[
+- Improved `selectInput()`.
+- Triggered by `a` element.
+- `select` contains multiple `option` tags.
+- `select` is followed by a label tag.
+]
+
+
+.xsmall.pull-right[
+```html
+<div class="list">
+  <ul>
+    <!-- Smart select item -->
+    <li>
+      <!-- Additional "smart-select" class -->
+      <a href="#" class="item-link smart-select">
+        <!-- select -->
+        <select name="fruits">
+          <option value="apple" selected>Apple</option>
+          ...
+        </select>
+        <!-- Select label -->
+      </a>
+    </li>
+  </ul>
+</div>
+```
+]
+
+
+---
+
+# Widget element (1/5): your turn `r emo::ji("experiment")`
+
+.pull-left[
+- Open `srcjs/framework7.js`.
+- Between CSS import and the app initialization, add the following code.
+- We also import `Sheet` since smartSelect needs it to open. 
+]
+
+.pull-right[
+```js
+// Install F7 Components using .use() method on class:
+import Sheet from 'framework7/esm/components/sheet/sheet.js';
+import smartSelect from 'framework7/esm/components/smart-select/smart-select.js';
+Framework7.use([Sheet, smartSelect]);
+```
+]
+
+---
+
+# Widget element (2/5): your turn `r emo::ji("experiment")`
+
+.pull-left[
+- Create a new `./srcjs/components/widget.f7.jsx` component.
+- Copy the preliminary code. 
+- Import it in the main app component.
+- Replace __ID__ and __LABEL__ by the relevant __props__ elements.
+- Don't change `data-open-in="sheet"`.
+]
+
+.xsmall.pull-right[
+```jsx
+export default (props, { $f7 }) => {
+
+  return () => (
+    <div class="list">
+      <ul>
+        <li>
+          <a 
+            class="item-link smart-select smart-select-init" 
+            id=ID 
+            data-open-in="sheet">
+            <select name=ID>
+              
+            </select>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">LABEL</div>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  )
+}
+```
+]
+
+
+---
+
+# Widget element (3/5): your turn `r emo::ji("experiment")`
+
+Let's add some `<option>` to the `<select>` tag...
+
+.pull-left[
+- Create a `names` array containing `wt`, `hp` and `qsec` strings.
+- Map over each array element to build an `<option>`.
+- Fill in the `___`.
+- Add the newly created elements to `<select>`
+]
+
+.xsmall.pull-right[
+```jsx
+const names = [___];
+const selectOptions = ___.map(
+  (name) => {
+    let isSelected = name === 'wt'? true: false;
+    return(
+      <option 
+        key={___} 
+        value={___} 
+        selected={___}>
+        {___}
+      </option>
+    );
+  }
+)
+```
+
+```jsx
+<select name=ID>
+  {___}
+</select>
+```
+]
+
+
+---
+
+# Widget element (4/5): your turn `r emo::ji("experiment")`
+
+Let's send the selected value to Shiny.
+
+.small.pull-left[
+- Create `getSelectValue`: 
+  - Give it an __id__ parameter.
+  - Smart select __instance__ is recovered with `$f7.smartSelect.get()` method.
+  - Smart select value obtained with `instance.getValue()`.
+  - Call the relevant Shiny JS method to set the input value ...
+  
+- In the render function:
+  -  Add an `onChange` prop to the `<a>` element. 
+  - Inside `onChange`, call `getSelectValue` with relevant __ID__ parameter.
+  - Sends it to Shiny with `Shiny.setInputValue`. 
+]
+
+.small.pull-right[
+```jsx
+export default (props, { $f7 }) => {
+  // Recover select value
+  const getSelectValue = (___) => {
+    let select = $f7.smartSelect.get(___);
+    Shiny.___(___, select.getValue());
+  };
+  
+  return () => (...)
+}
+```
+
+```jsx
+<a 
+  class="item-link smart-select smart-select-init" 
+  onChange={() => ___(ID)} 
+  id=ID 
+  data-open-in="sheet">
+  ... // ommitted since unchanged
+</a>
+```
+]
+
+
+---
+
+# Test it
+
+- Open `.R/app_server.R`.
+- Add this code, replacing __ID__ by what you chose JS side.
+
+```r
+observeEvent(input$<ID>, {
+  message(sprintf("Slider value: %s", input$<ID>))
+})
+```
+
+```r
+packer::bundle()
+devtools::load_all()
+run_app()
+```
+
+- Input does not have initial value...
+
+
+---
+
+# # Widget element (5/5): your turn `r emo::ji("experiment")`
+
+Give an initial value for Shiny.
+
+.pull-left[
+- Inside, `srcjs/components/widget.f7.jsx`.
+- Create the `initializeWidget` helper (outside the widget component).
+- Call it before the render function.
+]
+
+.pull-right[
+```js
+const initializeWidget = (id) => {
+  $(document).on('shiny:connected', () => {
+    // initial value
+    Shiny.___(
+      ___, 
+      $('#' + id + ' select').val(), 
+      {priority: 'event'}
+    );
+  });
+}
+```
+]
+
+
+---
+
+# Run your app!
+
+```r
+packer::bundle()
+devtools::load_all()
+run_app()
+```
+
+ 🏆 Congrats! You designed your first component. Let's 
+ improve it by adding some R logic. 
+
 
 ---
 class: break center middle
@@ -824,19 +976,141 @@ Break!
 See you in 5 minutes.
 </p>
 
+
 ---
 class: break center middle
-background-image: url('assets/img/bg/echarts.png')
+background-image: url('assets/img/bg/model.png')
 background-size: cover
 
 <h3 class="primary absolute bottom center">
-Echarts.js
+R Model
 </h3>
 
 ---
 class: header_background
 
 # Intro
+
+- Simple regression model within the `mtcars` dataset and `{ggplot2}`.
+- One variable is selected from JS in `input$var`.
+- Formula `lm(mpg ~ input$var, mtcars)`.
+
+
+---
+
+# R business logic
+
+.pull-left[
+- Open `.R/app_server.R`.
+- Fill in the `___` and `...`.
+]
+
+.pull-right[
+```r
+output$plot <- renderPlot({
+  ggplot(
+    data = ___,
+    mapping = aes(x = mpg, y = .data[[___]])
+  ) + 
+    geom_...() + 
+    geom_smooth()
+})
+```
+]
+
+That's all folks!
+
+
+---
+class: break center middle
+background-image: url('assets/img/bg/echarts.png')
+background-size: cover
+
+<h3 class="primary absolute bottom center">
+Homework: Echarts.js
+</h3>
+
+---
+class: header_background
+
+# Intro
+
+- Replace the previous `{ggplot2}` chart by JS code.
+- We'll have to send data from R to JS.
+
+Communication done through the __websocket__.
+
+.pull-left[
+- R side:
+  - **`sendCustomMessage`** sends R messages to JS.
+
+- JS side:
+  - `Shiny.addCustomMessageHandler` receives message from `session$sendCustomMessage`.
+Both are linked by the **type** parameter
+]
+
+.pull-right[
+```{r from-R-to-JS, echo=FALSE, out.width='100%'}
+knitr::include_graphics("assets/img/shiny-custom-message.png")
+```
+]
+
+
+
+---
+
+# echarts assets
+
+- Install echarts and echarts-gl.
+
+```r
+packer::npm_install(
+  c(
+    "echarts", 
+    "echarts-gl"
+  ),
+  scope = "prod"
+)
+```
+
+- Import JS assets. In `srcjs/components/widget.f7.jsx`:
+
+```js
+// Import plotting library
+import * as echarts from 'echarts';
+import 'echarts-gl';
+```
+
+---
+
+# echarts plotting strategy
+
+- Initialize the plot container.
+- Set plot options.
+- ...
+
+
+---
+
+# Recover R data
+
+.pull-left[
+- Open `srcjs/components/widget.f7.jsx`.
+- Create `renderPlot` function.
+- Add `Shiny.addCustomMessageHandler` to capture the message sent from R.
+- R `message` is a list with 2 elements: translate into a JS object. 
+- Insert `renderPlot` in the component core after `initializeWidget`.
+]
+
+.pull-right[
+```js
+const renderPlot = () => {
+  Shiny.____(___, (___) => {
+    // prepare for plot
+  });
+}
+```
+]
 
 ---
 class: break center middle
