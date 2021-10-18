@@ -91,10 +91,10 @@ We're in for 2 hours of **fun**!
 2. Bundling with packer 15 min
 3. Project Setup 				10 min
 4. _Break_ 							5  min
-5. Framework 7 					30 min
+5. Framework 7 					60 min
 6. _Break_ 							5  min
 7. R model 							5  min
-8. Echarts.js 					Homework
+8. Echarts.js 					(Homework)
 9. Questions
 
 ---
@@ -991,14 +991,14 @@ class: header_background
 
 # Intro
 
-- Simple regression model within the `mtcars` dataset and `{ggplot2}`.
-- One variable is selected from JS in `input$var`.
+- Simple regression model with the `mtcars` dataset and `{ggplot2}`.
+- One variable is selected from JS with newly designed custom widget.
 - Formula `lm(mpg ~ input$var, mtcars)`.
 
 
 ---
 
-# R business logic
+# R business logic: your turn `r emo::ji("experiment")`
 
 .pull-left[
 - Open `.R/app_server.R`.
