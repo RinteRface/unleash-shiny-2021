@@ -385,10 +385,10 @@ class: header_background
 
 # Intro
 
-- Develop a simple app utilizing a very famous web template (Framework7). 
+- Develop a simple app utilizing a cutting edge web template (Framework7). 
 - This app will consist in:
-  - A slider range controlling ...
-  - Produce a visualization powered by echarts JS library. 
+  - A select input controlling a variable.
+  - Produce a visualization powered `ggplot2` and optionally echartjs. 
 
 ---
 
@@ -757,7 +757,7 @@ It's time to add an extra component.
 
 ---
 
-# Widget element (1/5): your turn `r emo::ji("experiment")`
+# Widget element (1/5): your turn 🥼
 
 .pull-left[
 - Open `srcjs/framework7.js`.
@@ -776,7 +776,7 @@ Framework7.use([Sheet, smartSelect]);
 
 ---
 
-# Widget element (2/5): your turn `r emo::ji("experiment")`
+# Widget element (2/5): your turn 🥼
 
 .pull-left[
 - Create a new `./srcjs/components/widget.f7.jsx` component.
@@ -818,7 +818,7 @@ export default (props, { $f7 }) => {
 
 ---
 
-# Widget element (3/5): your turn `r emo::ji("experiment")`
+# Widget element (3/5): your turn 🥼
 
 Let's add some `<option>` to the `<select>` tag...
 
@@ -857,7 +857,7 @@ const selectOptions = ___.map(
 
 ---
 
-# Widget element (4/5): your turn `r emo::ji("experiment")`
+# Widget element (4/5): your turn 🥼
 
 Let's send the selected value to Shiny.
 
@@ -923,7 +923,7 @@ run_app()
 
 ---
 
-# # Widget element (5/5): your turn `r emo::ji("experiment")`
+# # Widget element (5/5): your turn 🥼
 
 Give an initial value for Shiny.
 
