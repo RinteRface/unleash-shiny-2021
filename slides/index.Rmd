@@ -134,6 +134,19 @@ class: header_background
 - Relies on existing web templates to save time.
 - Focus on app features.
 
+
+---
+
+# Workshop objectives
+
+- Setup rigorous R package structure for your app with {golem}.
+- Learn how to use modern web stack tools like webpack 
+to maintain your R/JS package with {packer}.
+- Learn how R (server) and JS (client) communicate to exchange data.
+- Learn modular JavaScript basics.
+- Learn basics of JSX. 
+- Design awesome user interface with external template. 
+
 ---
 class: break center middle
 background-image: url('assets/img/bg/packer.png')
