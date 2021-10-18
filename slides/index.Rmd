@@ -388,7 +388,7 @@ class: header_background
 - Develop a simple app utilizing a cutting edge web template (Framework7). 
 - This app will consist in:
   - A select input controlling a variable.
-  - Produce a visualization powered `ggplot2` and optionally echartjs. 
+  - Produce a visualization powered by `{ggplot2}` and optionally echartjs. 
 
 ---
 
