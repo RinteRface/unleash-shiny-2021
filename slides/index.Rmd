@@ -418,7 +418,7 @@ powered by echarts JS library ... TO REPHRASE LATER ...
 # Scaffold Framework7
 
 .pull-left[
-Inside our `{golem}` project we call:
+We call:
 
 ```r
 golem::create::golem("myApp")
