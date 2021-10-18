@@ -109,6 +109,12 @@ class: header_background
 
 # Intro
 
+- Developing custom design for Shiny takes (too much) time ...
+- `{shinyMobile}` development took about 2 years ...
+- What if you are already know a bit of HTML/CSS/JS?
+- Relies on existing web templates to save time.
+- Focus on app features.
+
 ---
 class: break center middle
 background-image: url('assets/img/bg/packer.png')
@@ -418,7 +424,7 @@ class: header_background
 ]
 
 .pull-right[
-&lt;div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; margin-top: -50px !important; display: none;"&gt;
+&lt;div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; margin-top: -50px !important;"&gt;
 &lt;div class="md-body"&gt;
 &lt;div class="md-buttons"&gt;&lt;/div&gt;
 &lt;div class="md-front-camera"&gt;&lt;/div&gt;
@@ -430,6 +436,338 @@ class: header_background
 &lt;/div&gt;
 &lt;/div&gt;
 ]
+
+---
+
+# Scaffold Framework7
+
+.pull-left[
+Inside our `{golem}` project we call:
+
+```r
+packer::scaffold_golem(framework7 = TRUE)
+```
+This step:
+
+  - Sets a Framework7 compatible structure.
+  - Let's review it below.
+]
+
+.pull-right[
+&lt;img src="assets/img/framework7-assets.png" width="100%" /&gt;
+]
+
+---
+
+# Import Framework7
+
+Inside the main `srcjs/framework7.js` we find:
+
+.small[
+```js
+// Import Framework7
+import Framework7 from 'framework7';
+// Import Framework7 Styles
+import 'framework7/framework7-bundle.min.css'; #&lt;&lt;
+// Install F7 Components using .use() method on class:
+import Range from 'framework7/esm/components/range/range.js';
+import Toast from 'framework7/esm/components/toast/toast.js';
+Framework7.use([Range, Toast]);
+```
+]
+
+- Notice how CSS is imported (requires style/css loaders).
+- Modular approach (import only what is required).
+- Lighter JS bundle.
+- Faster app.
+
+
+---
+
+# Layout basics
+
+.pull-left[
+Framework7 requires: 
+- `index.html`.
+- `&lt;div id="app"&gt;&lt;/div&gt;` is the app root.
+- `index.js` the script generated with `{packer}` after bundling.
+- All of this happens in __app_ui.R__.
+- `golem_add_external_resources()` fills the `&lt;!-- Head content ... --&gt;` .
+]
+
+.small.pull-right[
+```html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- Head content ... --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- App root element ... --&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+  
+    &lt;!-- Path to Framework7 JS--&gt;
+    &lt;script type="text/javascript" src="www/index.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+]
+
+---
+
+# App template
+
+.pull-left[
+The simplest Framework7 layout is composed of:
+- The __app__ wrapper with __unique id__.
+- A single view.
+- A page with: 
+  - navbar (top).
+  - toolbar (bottom).
+  - page content (middle).
+]
+
+.small.pull-right[
+```html
+&lt;div id="app"&gt;
+  &lt;div class="view view-main view-init safe-areas"&gt;
+    &lt;div class="page"&gt;
+      &lt;!-- navbar --&gt;
+      &lt;!-- toolbar --&gt;
+      &lt;div class="page-content"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+]
+
+---
+
+# JSX
+
+- __Combine__ HTML and JavaScript code in the same file.
+- Create __re-usable components__ in `&lt;COMPONENT&gt;.f7.jsx`.
+- See [here](https://unleash-shiny.rinterface.com/going-further-reactR.html#about-jsx).
+
+.small.pull-left[
+With JSX
+```jsx
+const List = () =&gt; {
+
+  const title = 'Hello World';
+
+  return () =&gt; (
+    &lt;div class="title"&gt;{title}&lt;/div&gt;
+  )
+}
+```
+]
+
+.small.pull-right[
+Same without JSX ... (too verbose and weird!)
+```html
+&lt;template&gt;
+  &lt;div class="title" innerHTML=${title}&gt;&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default (props) =&gt; {
+    const title = 'Hello World';
+
+    return $render;
+  }
+&lt;/script&gt;
+```
+]
+
+
+---
+
+# About Framework7 components
+
+.pull-left[
+- Components have 2 default input parameters:
+  - props gather all user given inputs.
+  - context is a helper providing access to multiple tools:
+    - The app instance `$f7`.
+    - $update to programmatically re-render the component.
+    - ...
+- Components return a __render__ function. 
+- Components can be self-closed.
+]
+
+.pull-right[
+`user` and `id` are attributes, props will contain both. 
+
+```html
+&lt;Component user="David" id="compo"/&gt;
+```
+
+```jsx
+const Component = (props, context) {
+  const greetings = 'Hello ' + props.user;
+  
+  // render function
+  return () =&gt; (
+    &lt;h1&gt;{greetings}&lt;/h1&gt;
+  )
+}
+```
+]
+
+---
+
+# Main app component
+
+.pull-left[
+- `{packer}` created `app.f7.jsx`.
+- Contains the main app layout.
+- Imports a sub component. 
+- Initializes the component. 
+] 
+
+.xsmall.pull-right[
+```jsx
+import { Widget, initializeWidget } from './widget.f7.jsx';
+
+export default (props, { $f7 }) =&gt; {
+  const title = 'Hello World';
+  
+  initializeWidget($f7); // initialize the widget
+  
+  return () =&gt; (
+    &lt;div id="app"&gt;
+      &lt;div class="view view-main view-init safe-areas"&gt;
+        &lt;div class="page"&gt;
+          &lt;!-- navbar ... --&gt;
+          &lt;!-- toolbar ... --&gt;
+          &lt;div class="page-content"&gt;
+            &lt;Widget label="A label"/&gt; #&lt;&lt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+```
+]
+
+
+---
+
+# Widget element (1/3)
+
+.pull-left[
+- A range slider. 
+- Auto initialized component (`range-slider-init` class).
+- Event handler: on range drag, calls `getRangeValue`.
+]
+
+.xsmall.pull-right[
+```jsx
+const Widget = (props, { $f7, $update }) =&gt; {
+
+  return () =&gt; (
+    &lt;div&gt;
+      &lt;div class="block-title"&gt;Widget label&lt;/div&gt;
+      &lt;div class="block"&gt;
+        &lt;div
+          class="range-slider range-slider-init"
+          data-min="0"
+          data-min="0"
+          data-max="2"
+          data-step="0.1"
+          data-label="true"
+          data-value="0.1"
+          data-scale="true"
+          data-scale-steps="2"
+          data-scale-sub-steps="10"
+          id="slider"
+          onrangeChange={(e) =&gt; getRangeValue(e)}
+          &gt;&lt;/div&gt;
+      &lt;/div&gt;  
+    &lt;/div&gt;
+  )
+}
+```
+]
+
+
+---
+
+# Widget element (2/3)
+
+.pull-left[
+- Recovers the range value.
+- Sends it to Shiny with `Shiny.setInputValue`. 
+]
+
+.pull-right[
+```js
+// Handle range change for ODE model computation
+const getRangeValue = (e) =&gt; {
+  const range = $f7.range.get(e.target);
+  Shiny.setInputValue(range.el.id + '_value', range.value);
+  $update();
+};
+```
+]
+
+
+---
+
+# Widget element (3/3)
+
+.pull-left[
+- Also requires to give an initial value for Shiny.
+- `app` refers to the app instance, `$f7`.
+- Function called from top level App component. 
+- On the R side, we can access `input$slider_value`!
+]
+
+.pull-right[
+```js
+const initializeWidget = (app) =&gt; {
+  $(document).on('shiny:connected', () =&gt; {
+    // initial value
+    Shiny.setInputValue(
+        'slider_value', 
+        parseFloat($('#slider').attr('data-value'), 10), 
+        {priority: 'event'}
+    );
+  });
+}
+```
+]
+
+
+---
+
+# Initialize App instance
+
+.pull-left[
+Inside `srcjs/framework7.js`, we:
+  - import the main app component.
+  - Initialize the app instance.
+    - Target __app__ id.
+    - Set custom theme.
+    - Plug the app component in the component slot.
+    - Many other options available ...
+]
+
+.pull-right[
+```js
+// ... Other imports ...
+
+import App from './components/app.f7.jsx';
+let app = new Framework7({
+  el: '#app',
+  theme: 'ios',
+  // specify main app component
+  component: App
+});
+```
+]
+
 
 ---
 class: break center middle
