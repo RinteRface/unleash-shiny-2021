@@ -390,6 +390,32 @@ class: header_background
 
 # Intro
 
+You are going to develop a simple app utilizing a very famous web template (Framework7). 
+This app will consist in a slider range controlling ... to produce a visualization
+powered by echarts JS library ... TO REPHRASE LATER ...
+
+---
+
+# Scaffold Framework7
+
+.pull-left[
+Inside our `{golem}` project we call:
+
+```r
+golem::create::golem("myApp")
+packer::scaffold_golem(framework7 = TRUE)
+```
+This step:
+
+  - Sets a Framework7 compatible structure.
+  - Let's review it below.
+]
+
+.pull-right[
+&lt;img src="assets/img/framework7-assets.png" width="100%" /&gt;
+]
+
+
 ---
 class: break center middle
 background-image: url('assets/img/bg/f7.png')
@@ -448,26 +474,6 @@ class: header_background
 &lt;button class="md-home-button"&gt;&lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-]
-
----
-
-# Scaffold Framework7
-
-.pull-left[
-Inside our `{golem}` project we call:
-
-```r
-packer::scaffold_golem(framework7 = TRUE)
-```
-This step:
-
-  - Sets a Framework7 compatible structure.
-  - Let's review it below.
-]
-
-.pull-right[
-&lt;img src="assets/img/framework7-assets.png" width="100%" /&gt;
 ]
 
 ---
