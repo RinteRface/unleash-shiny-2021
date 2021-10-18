@@ -93,7 +93,7 @@ We're in for 2 hours of **fun**!
 4. _Break_ 							5  min
 5. Framework 7 					60 min
 6. _Break_ 							5  min
-7. R model 							5  min
+7. R model 							10  min
 8. Echarts.js 					(Homework)
 9. Questions
 
@@ -879,7 +879,7 @@ Let's send the selected value to Shiny.
 export default (props, { $f7 }) => {
   // Recover select value
   const getSelectValue = (___) => {
-    let select = $f7.smartSelect.get(___);
+    let select = $f7.smartSelect.get('#' + ___);
     Shiny.___(___, select.getValue());
   };
   
@@ -1020,6 +1020,36 @@ output$plot <- renderPlot({
 
 That's all folks!
 
+
+---
+
+# Insert the plot
+
+- `output$plot` works by pair with `renderPlot("plot")` ...
+- but ... we can't insert the plot as R code.
+- Don't forget that Shiny is just creating HTML from R.
+- In the R console, run:
+
+```r
+renderPlot("plot")
+```
+
+This yields:
+
+```html
+<div id="id" class="shiny-plot-output" style="width:100%;height:400px;"></div>
+```
+
+Insert this in `./srcjs/components/app.f7.jsx`. 
+
+
+---
+
+# Improve the design
+
+- Explore the Framework7 card container [documentation](https://framework7.io/docs/cards.html).
+- Include the previous plot in the container of your choice.
+- Recompile the JS code and run the app. 
 
 ---
 class: break center middle
