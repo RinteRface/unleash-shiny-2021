@@ -1091,8 +1091,14 @@ knitr::include_graphics("assets/img/shiny-custom-message.png")
 
 # echarts assets
 
+.pull-left[
 - Install echarts and echarts-gl.
+- Import JS assets in `srcjs/components/widget.f7.jsx`.
+- Review the echarts [documentation](https://echarts.apache.org/examples/en/index.html).
+]
 
+
+.pull-right[
 ```r
 packer::npm_install(
   c(
@@ -1102,43 +1108,180 @@ packer::npm_install(
   scope = "prod"
 )
 ```
-
-- Import JS assets. In `srcjs/components/widget.f7.jsx`:
-
 ```js
 // Import plotting library
 import * as echarts from 'echarts';
 import 'echarts-gl';
 ```
+]
+
+
+
 
 ---
 
 # echarts plotting strategy
 
+.pull-left[
+- Create a DOM container for the plot.
 - Initialize the plot container.
 - Set plot options.
-- ...
+- Update plot instance.
+]
+
+.xsmall.pull-right[
+```html
+<div id="plot" style="width:100%; min-height:400px;"></div>
+```
+
+```js
+let chart = echarts.init(document.getElementById('plot'));
+myChartOptions = {
+  title: { text: 'Plot title' },
+  legend: { data:[...] },
+  xAxis: { data: ...},
+  yAxis: { type: ... },
+  series: [
+    {
+      name: ...,
+      type: ...,
+      data: ...
+    },
+    // other data
+  ]
+};
+myChart.setOption(myChartOptions);
+```
+]
 
 
 ---
 
-# Recover R data
+# Process R data
+
+.pull-left[
+- Create a new `.R/process.R` script.
+- `process_data()` selects the relevant column based on a given parameter.
+- Fill in the `___`.
+]
+
+.small.pull-right[
+```r
+process_data <- function(parm, session = shiny::getDefaultReactiveDomain()) {
+  
+  data_subset <- list(mtcars$mpg, mtcars[[___]])
+  names(data_subset) <- c("mpg", parm)
+  
+  processed_data <- list(
+    data = ___,
+    var = ___
+  )
+  
+  session$sendCustomMessage("model_data", ___)
+}
+```
+]
+
+
+---
+
+# Add Shiny
+
+.pull-left[
+- In `.R/app_server.R`, add an `observeEvent()` to trigger `process_data()` based
+on the select input value (JS side).
+- Comment out the old `{ggplot2}` code. 
+- In `.srcjs/components/app.f7.jx`, remove the `shiny-plot-output` class from the plot container. 
+]
+
+
+.pull-right[
+```r
+observeEvent(___, {
+  ___(___)
+})
+```
+]
+
+---
+
+# Recover R data (1/3)
 
 .pull-left[
 - Open `srcjs/components/widget.f7.jsx`.
-- Create `renderPlot` function.
-- Add `Shiny.addCustomMessageHandler` to capture the message sent from R.
-- R `message` is a list with 2 elements: translate into a JS object. 
-- Insert `renderPlot` in the component core after `initializeWidget`.
+- Inside `initializeWidget` function:
+  - Within the `shiny:connected` event listener, initialize the echarts plot instance.
+  - Copy and paste the resize event to handle plot resize.
 ]
+
+.small.pull-right[
+```js
+let plot;
+$(document).on('shiny:connected', () => {
+  // initial value
+  
+  // prepare echarts plot
+  plot = echarts.___(document.getElementById(___));
+});
+
+// Resize event
+$(window).on('resize', function() {
+  plot.resize();
+});
+```
+]
+
+---
+
+# Recover R data (2/3)
+
+.pull-left[
+- Add `Shiny.addCustomMessageHandler` to capture the message sent from R.
+- A R list translates into a JS object.
+- Fill in the `___`.
+]
+
 
 .pull-right[
 ```js
-const renderPlot = () => {
-  Shiny.____(___, (___) => {
-    // prepare for plot
-  });
+let plotOptions, p, data;
+Shiny.addCustomMessageHandler(___, (___) => {
+  p = message.var;
+  data = message.___;
+  
+});
+```
+]
+
+---
+
+# Recover R data (3/3)
+
+.pull-left[
+- In the same message handler, set plot options.
+- Apply options to the plot instance.
+- Fill in the `___`.
+]
+
+
+.small.pull-right[
+```js
+plotOptions = {
+  title: { text: 'Plot' },
+  tooltip: {},
+  legend: { data:['mpg', p] },
+  xAxis: { data: message.data[___] },
+  yAxis: { type: 'value' },
+  series: [
+    {
+      name: p,
+      type: 'scatter',
+      data: message.data[___]
+    }
+  ]
 }
+
+___.setOption(___);
 ```
 ]
 
