@@ -120,6 +120,10 @@ class: header_background
 - Relies on existing web templates to save time.
 - Focus on app features.
 
+.center[
+&lt;img src="assets/img/undraw_Time_management_re_tk5w.svg" width="25%" /&gt;
+]
+
 
 ---
 
@@ -132,6 +136,10 @@ to maintain your R/JS package with {packer}.
 - Learn modular JavaScript basics.
 - Learn basics of JSX. 
 - Design awesome user interface with external template. 
+
+.center[
+&lt;img src="assets/img/undraw_Goals_re_lu76.svg" width="25%" /&gt;
+]
 
 ---
 class: break center middle
@@ -344,7 +352,6 @@ packer::scaffold_golem()
 _The term "scaffold" was blatantly stolen from `htmlwidgets::scaffoldWidget`._
 
 ---
-class: center, centerize
 
 # Bundle?
 
@@ -370,8 +377,13 @@ class: header_background
 
 - Develop a simple app utilizing a cutting edge web template (Framework7). 
 - This app will consist in:
-  - A select input controlling a variable.
-  - Produce a visualization powered by `{ggplot2}` and optionally echartjs. 
+  - A JS powered select input controlling a variable.
+  - A visualization powered by `{ggplot2}` 
+  - Homework: replace `{ggplot2}` by JS driven visualization. 
+  
+.center[
+&lt;img src="assets/img/undraw_working_remotely_jh40.svg" width="50%" /&gt;
+]
 
 ---
 
@@ -381,14 +393,14 @@ class: header_background
 We call:
 
 ```r
-golem::create::golem("myApp")
 packer::scaffold_golem(framework7 = TRUE)
 ```
 
-Sets a Framework7 compatible structure:
-  - npm dependencies.
-  - loaders for CSS, JS, JSX ...
-  - config for webpack.
+Sets a Framework7 compatible structure for `{golem}`:
+  - Install __npm__ dependencies.
+  - JS assets folder `srcjs`.
+  - __Loaders__ for CSS, JS, JSX ...
+  - Config for __webpack__.
   - So that you don't have to worry too much.
 ]
 
@@ -399,15 +411,17 @@ Sets a Framework7 compatible structure:
 
 ---
 
-# Test it
+# Test it 🥼
 
-This is a very basic app but it work well.
+This is a very basic app but it works well.
 
 ```r
 packer::bundle()
 devtools::load_all()
 run_app()
 ```
+
+Bad new ... this is time for the ... 
 
 
 ---
@@ -455,7 +469,7 @@ class: header_background
 ---
 
 .pull-left[
-&lt;div class="md-iphone-5 md-black-device" id="singleLayoutDemo" style="font-size: 0.5em; !important;"&gt;
+&lt;div class="md-iphone-5 md-black-device" id="singleLayoutDemo" style="font-size: 0.5em; margin-top: 20px; !important;"&gt;
 &lt;div class="md-body"&gt;
 &lt;div class="md-buttons"&gt;&lt;/div&gt;
 &lt;div class="md-front-camera"&gt;&lt;/div&gt;
@@ -469,7 +483,7 @@ class: header_background
 ]
 
 .pull-right[
-&lt;div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; !important;"&gt;
+&lt;div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; margin-top: 20px; !important;"&gt;
 &lt;div class="md-body"&gt;
 &lt;div class="md-buttons"&gt;&lt;/div&gt;
 &lt;div class="md-front-camera"&gt;&lt;/div&gt;
@@ -484,7 +498,7 @@ class: header_background
 
 ---
 
-# Import Framework7 and CSS
+# Import Framework7 and CSS 👨‍🏫
 
 Inside the main `srcjs/framework7.js`.
 
@@ -508,7 +522,7 @@ import 'framework7/framework7-bundle.min.css';
 
 ---
 
-# Layout basics
+# Layout basics 👩‍🏫
 
 This part is handled by __app_ui.R__. 
 
@@ -539,12 +553,12 @@ Framework7 requires an `index.html` script:
 
 ---
 
-# App template
+# App template 👨‍🏫
 
 .pull-left[
-The simplest Framework7 layout is composed of:
+The simplest Framework7 [layout](https://framework7.io/docs/app-layout.html) is composed of:
 - The __app__ wrapper with __unique id__ required for initialization.
-- A single auto initialized view.
+- A single __auto-initialized__ view.
 - A page with: 
   - navbar (top).
   - toolbar (bottom).
@@ -566,28 +580,13 @@ The simplest Framework7 layout is composed of:
 ]
 
 ---
+ 
+# HTML + JS: welcome JSX 👨‍🏫
 
-# HTML + JS: welcome JSX
-
-- __Combine__ HTML and JavaScript code in the same file.
-- Create __re-usable components__ in `&lt;COMPONENT&gt;.f7.jsx`.
-- See [here](https://unleash-shiny.rinterface.com/going-further-reactR.html#about-jsx).
+__Combine__ HTML and JavaScript code in the same file.
 
 .small.pull-left[
-With JSX
-```jsx
-export default () =&gt; {
-  const title = 'Hello World';
-
-  return () =&gt; (
-    &lt;div class="title"&gt;{title}&lt;/div&gt;
-  )
-}
-```
-]
-
-.small.pull-right[
-Same without JSX ... (too verbose and weird!)
+### Without JSX
 ```html
 &lt;template&gt;
   &lt;div class="title" innerHTML=${title}&gt;&lt;/div&gt;
@@ -600,24 +599,42 @@ Same without JSX ... (too verbose and weird!)
   }
 &lt;/script&gt;
 ```
+
+👎 Difficult to manage.
+]
+
+.small.pull-right[
+### With JSX
+```jsx
+export default () =&gt; {
+  const title = 'Hello World';
+
+  return () =&gt; (
+    &lt;div class="title"&gt;{title}&lt;/div&gt;
+  )
+}
+```
+
+👍 easy to manage.
 ]
 
 
 ---
 
-# About Framework7 components
+# About Framework7 components 👨‍🏫
 
 .pull-left[
-- Components have 2 default input parameters:
+- [Components](https://framework7.io/docs/router-component.html#component-function) have 2 default parameters:
   - __props__ gather all passed __attributes__.
-  - __context__ is a helper providing access to multiple tools:
+  - __context__ provides access to:
     - The app instance `$f7`.
     - More [here](https://framework7.io/docs/router-component.html#component-context).
-- Components must return a __render__ function. 
-- Components can be self-closed.
+- Components:
+  - must return a __render__ function. 
+  - can be self-closed.
 ]
 
-.pull-right[
+.small.pull-right[
 ```html
 &lt;Component user="David" id="compo"/&gt;
 ```
@@ -636,12 +653,13 @@ const Component = (props, context) {
 
 ---
 
-# Main app component
+# Main app component 👩‍🏫
 
 `{packer}` created `app.f7.jsx`.
 
 .pull-left[
-- Contains the app layout as a __main__ component.
+- The whole app can be a [component](https://framework7.io/docs/router-component.html#main-app-component)!
+- Very similar to other tools like [React](https://en.reactjs.org/) or [Vue](https://vuejs.org/).
 ] 
 
 .xsmall.pull-right[
@@ -671,17 +689,16 @@ export default (props, { $f7 }) =&gt; {
 
 ---
 
-# Initialize App instance
+# Initialize App instance 👨‍🏫
 
-The remaining of `srcjs/framework7.js` initializes the app instance.
+The remaining of `srcjs/framework7.js`:
 
 .pull-left[
-- import the main App component.
-- Initialize the app instance:
-    - Target __app__ id.
-    - Set custom theme.
-    - Plug the App component in the __component__ slot.
-    - Many other options available ...
+- Initializes the app instance:
+  - Targets __app__ id.
+  - Sets custom theme.
+  - Plugs the App component in the __component__ slot.
+  - Many other options available ...
 ]
 
 .pull-right[
@@ -697,6 +714,17 @@ let app = new Framework7({
 });
 ```
 ]
+
+---
+
+# Customize app: your turn 🥼
+
+- Within `let app = new Framework7({ ... })`:
+  - Change the __theme__ to `md` (see [doc](https://framework7.io/docs/app.html#app-parameters)). 
+
+- In `.R/app_ui.R`:
+  - Add `theme-dark` class to the `body` tag.
+  - Add `color-theme-***`, where `***` is a color from [here](https://framework7.io/docs/color-themes.html#colors).
 
 ---
 
@@ -977,7 +1005,7 @@ class: header_background
 
 ---
 
-# R business logic: your turn 🥼
+# R business logic: your turn 🧪
 
 .pull-left[
 - Open `.R/app_server.R`.
@@ -1270,6 +1298,11 @@ background-size: cover
 &lt;h3 class="primary absolute bottom center"&gt;
 Questions?
 &lt;/h3&gt;
+
+---
+class: break center middle
+background-image: url('assets/img/bg/undraw_winners_ao2o.svg')
+background-size: cover
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
