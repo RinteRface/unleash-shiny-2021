@@ -491,15 +491,15 @@
     },
     "packer": {
       "Package": "packer",
-      "Version": "0.1.2.9001",
+      "Version": "0.1.2.9002",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "packer",
       "RemoteUsername": "JohnCoene",
       "RemoteRef": "HEAD",
-      "RemoteSha": "332e01964835bf4cdf3d5dfc1eb0f2c43d3db107",
-      "Hash": "b2d714a313dabf2334537eadfba989a5"
+      "RemoteSha": "9a1ed41543ce7a036c29a090a12741de026724a7",
+      "Hash": "9d0a33832ada21f8cde51d2f0408eeb4"
     },
     "pillar": {
       "Package": "pillar",
@@ -615,10 +615,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "0.4.11",
+      "Version": "0.4.12",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "515f341d3affe0de9e4a7f762efb0456"
+      "Hash": "0879f5388fe6e4d56d7ef0b7ccb031e5"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
