@@ -525,7 +525,7 @@ knitr::include_graphics("assets/img/framework7.svg")
 
 ---
 
-# Import Framework7 and CSS `r emo::ji("professor")`
+# Import Framework7 and CSS 👩‍🏫
 
 Inside the main `srcjs/framework7.js`.
 
@@ -549,7 +549,7 @@ import 'framework7/framework7-bundle.min.css';
 
 ---
 
-# Layout basics `r emo::ji("professor")`
+# Layout basics 👩‍🏫
 
 This part is handled by __app_ui.R__. 
 
@@ -580,7 +580,7 @@ Framework7 requires an `index.html` script:
 
 ---
 
-# App template `r emo::ji("professor")`
+# App template 👩‍🏫
 
 .pull-left[
 The simplest Framework7 [layout](https://framework7.io/docs/app-layout.html) is composed of:
@@ -608,7 +608,7 @@ The simplest Framework7 [layout](https://framework7.io/docs/app-layout.html) is 
 
 ---
  
-# HTML + JS: welcome JSX `r emo::ji("professor")`
+# HTML + JS: welcome JSX 👩‍🏫
 
 __Combine__ HTML and JavaScript code in the same file.
 
@@ -648,7 +648,7 @@ export default () => {
 
 ---
 
-# About Framework7 components `r emo::ji("professor")`
+# About Framework7 components 👩‍🏫
 
 .pull-left[
 - [Components](https://framework7.io/docs/router-component.html#component-function) have 2 default parameters:
@@ -680,7 +680,7 @@ const Component = (props, context) {
 
 ---
 
-# Main app component `r emo::ji("professor")`
+# Main app component 👩‍🏫
 
 `{packer}` created `app.f7.jsx`.
 
@@ -716,7 +716,7 @@ export default (props, { $f7 }) => {
 
 ---
 
-# Initialize App instance `r emo::ji("professor")`
+# Initialize App instance 👩‍🏫
 
 The remaining of `srcjs/framework7.js`:
 
@@ -755,7 +755,7 @@ let app = new Framework7({
 
 ---
 
-# About the Framework7 smartSelect
+# About the Framework7 smartSelect 👩‍🏫
 
 It's time to add an extra component.
 
@@ -858,9 +858,9 @@ Let's add some `<option>` to the `<select>` tag...
 
 .pull-left[
 - Create a `names` array containing `wt`, `hp` and `qsec` strings.
-- Map over each array element to build an `<option>`.
+- Map over each array element to build an `<option>` array.
 - Fill in the `___`.
-- Add the newly created elements to `<select>`
+- Add the newly created elements to `<select>`.
 ]
 
 .xsmall.pull-right[
@@ -900,7 +900,7 @@ Let's send the selected value to Shiny.
   - Give it an __id__ parameter.
   - Smart select __instance__ is recovered with `$f7.smartSelect.get()` method.
   - Smart select value obtained with `instance.getValue()`.
-  - Call the relevant Shiny JS method to set the input value ...
+  - Call the relevant Shiny JS method to set the input value.
   
 - In the render function:
   -  Add an `onChange` prop to the `<a>` element. 
@@ -912,7 +912,7 @@ Let's send the selected value to Shiny.
 ```jsx
 export default (props, { $f7 }) => {
   // Recover select value
-  const getSelectValue = (___) => {
+  const getSelectValue = (id) => {
     let select = $f7.smartSelect.get('#' + ___);
     Shiny.___(___, select.getValue());
   };
@@ -935,11 +935,15 @@ export default (props, { $f7 }) => {
 
 ---
 
-# Test it
+# Test it 🥼
 
+.pull-left[
 - Open `.R/app_server.R`.
 - Add this code, replacing __ID__ by what you chose JS side.
+- Input does not have initial value...
+]
 
+.pull-right[
 ```r
 observeEvent(input$<ID>, {
   message(sprintf("Slider value: %s", input$<ID>))
@@ -951,23 +955,23 @@ packer::bundle()
 devtools::load_all()
 run_app()
 ```
-
-- Input does not have initial value...
+]
 
 
 ---
 
-# # Widget element (5/5): your turn 🥼
+# Widget element (5/5): your turn 🥼
 
 Give an initial value for Shiny.
 
 .pull-left[
 - Inside, `srcjs/components/widget.f7.jsx`.
 - Create the `initializeWidget` helper (outside the widget component).
+- Fill in the `___`.
 - Call it before the render function.
 ]
 
-.pull-right[
+.small.pull-right[
 ```js
 const initializeWidget = (id) => {
   $(document).on('shiny:connected', () => {
@@ -985,7 +989,7 @@ const initializeWidget = (id) => {
 
 ---
 
-# Run your app!
+# Test it 🥼
 
 ```r
 packer::bundle()
@@ -1032,7 +1036,7 @@ class: header_background
 
 ---
 
-# R business logic: your turn `r emo::ji("experiment")`
+# R business logic: your turn 🥼
 
 .pull-left[
 - Open `.R/app_server.R`.
@@ -1057,33 +1061,45 @@ That's all folks!
 
 ---
 
-# Insert the plot
+# Insert the plot 🥼
 
+
+.pull-left[
 - `output$plot` works by pair with `renderPlot("plot")` ...
-- but ... we can't insert the plot as R code.
+- but ... we can't insert the plot as R code inside `app_ui.R`.
 - Don't forget that Shiny is just creating HTML from R.
-- In the R console, run:
+]
+
+.pull-right[
+In the R console, run:
 
 ```r
 renderPlot("plot")
 ```
 
-This yields:
+which yields:
 
 ```html
 <div id="id" class="shiny-plot-output" style="width:100%;height:400px;"></div>
 ```
 
 Insert this in `./srcjs/components/app.f7.jsx`. 
+]
 
 
 ---
 
-# Improve the design
+# Improve the design 🥼
 
-- Explore the Framework7 card container [documentation](https://framework7.io/docs/cards.html).
+- Explore the Framework7 __card__ container [documentation](https://framework7.io/docs/cards.html).
 - Include the previous plot in the container of your choice.
 - Recompile the JS code and run the app. 
+
+.center[
+```{r card-design, echo=FALSE, out.width='40%'}
+knitr::include_graphics("assets/img/undraw_design_stats_ne2k.svg")
+```
+]
 
 ---
 class: break center middle
