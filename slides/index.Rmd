@@ -6,11 +6,7 @@ date: "10-10-2021"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: [
-      "assets/css/style.css", 
-      "assets/css/xaringan-extra.css",
-      "assets/css/custom.css"
-    ]
+    css: ["assets/css/style.css", "assets/css/xaringan-extra.css", "assets/css/custom.css"]
     includes:
       after_body: assets/html/includes.html
     mathjax: false
