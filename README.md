@@ -2,7 +2,7 @@
 
 R/Pharma workshop (2hours)
 
-## Get Started
+## Setup
 
 Clone this repository with the RStudio IDE or via the 
 command line.
@@ -14,7 +14,7 @@ cd unleash-shiny-2021
 
 Then run `renv::restore()` to install the dependencies.
 
-Importantly, this workshop makes heavy use of npm
+:warning: this workshop makes heavy use of npm
 (Node's Package Manager), it comes with the installation of
 node.js.
 
