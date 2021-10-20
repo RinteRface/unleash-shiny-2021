@@ -4,6 +4,7 @@
     <title>Unleash Shiny</title>
     <meta charset="utf-8" />
     <meta name="author" content="David Granjon (Novartis) &amp; John Coene (Opifex)" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
     <link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
@@ -20,6 +21,7 @@
     <script src="libs/js4shiny-redirectConsoleLog-0.0.28/redirectConsoleLog.js"></script>
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
     <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -78,29 +80,34 @@ We're in for 2 hours of **fun**!
 - Ask questions ❓  
 
 1. Introduction 				5  min
-2. Bundling with packer 10 min
-3. R model 							5  min
-4. Project Setup 				30 min
-5. _Break_ 							5  min
-6. Framework 7 					30 min
-7. Echarts.js 					15 min
-8. Questions
+2. Bundling with packer 15 min
+3. Project Setup 				10 min
+4. _Break_ 							5  min
+5. Framework 7 					60 min
+6. _Break_ 							5  min
+7. R model 							10  min
+8. Echarts.js 					(Homework)
+9. Questions
 
 ---
 
 # Workshop Material
 
 - Slides: [rinterface.com/shiny/talks/RPharma2021](https://rinterface.com/shiny/talks/RPharma2021)
-- For a plug and play experience, we created a [Rstudio Cloud](https://rstudio.cloud/spaces/92568/join?access_code=kqUUGAOZMMHSZoAQBrQ1GHSOBxSE4u1q8JvrJoRs) project with everything installed for you
 
-.center[
-https://rstudio.cloud/spaces/92568/join?access_code=kqUUGAOZMMHSZoAQBrQ1GHSOBxSE4u1q8JvrJoRs
-]
-  
-- To avoid **connection issues**, disconnect from your **VPN**!
-- Somes slides contain code that you may run (a **sandbox** space is available in RStudio Cloud)
+Clone this repository with the RStudio IDE or via the command line.
 
-&lt;img src="assets/img/rstudio_cloud_project.jpg" width="100%" /&gt;
+```shell
+git clone https://github.com/RinteRface/unleash-shiny-2021.git
+cd unleash-shiny-2021
+```
+
+Then run `renv::restore()` to install the dependencies.
+
+Importantly, this workshop makes heavy use of npm (Node's Package Manager), it comes with the installation of node.js:
+
+- You can manually install node.js: nodejs.org/en/download/.
+- You can also use package managers: nodejs.org/en/download/package-manager/.
 
 ---
 class: break center middle
@@ -115,6 +122,33 @@ Introduction
 class: header_background
 
 # Intro
+
+- Developing custom design for Shiny takes __too much__ time ...
+- `{shinyMobile}` development `&gt;=` 2 years ...
+- What if you are already know a bit of HTML/CSS/JS?
+- Relies on existing web templates to save time.
+- Focus on app features.
+
+.center[
+&lt;img src="assets/img/undraw_Time_management_re_tk5w.svg" width="25%" /&gt;
+]
+
+
+---
+
+# Workshop objectives
+
+- Setup rigorous R package structure for your app with {golem}.
+- Learn how to use modern web stack tools like webpack 
+to maintain your R/JS package with {packer}.
+- Learn how R (server) and JS (client) communicate to exchange data.
+- Learn modular JavaScript basics.
+- Learn basics of JSX. 
+- Design awesome user interface with external template. 
+
+.center[
+&lt;img src="assets/img/undraw_Goals_re_lu76.svg" width="25%" /&gt;
+]
 
 ---
 class: break center middle
@@ -327,7 +361,6 @@ packer::scaffold_golem()
 _The term "scaffold" was blatantly stolen from `htmlwidgets::scaffoldWidget`._
 
 ---
-class: center, centerize
 
 # Bundle?
 
@@ -336,33 +369,6 @@ Source code is written in `/srcjs` and is bundled to `/inst`
 ```r
 packer::bundle()
 ```
-
----
-class: break center middle
-background-image: url('assets/img/bg/model.png')
-background-size: cover
-
-&lt;h3 class="primary absolute bottom center"&gt;
-R Model
-&lt;/h3&gt;
-
----
-class: header_background
-
-# Intro
-
----
-class: break center middle
-background-image: url('assets/img/bg/break.png')
-background-size: cover
-
-&lt;h3 class="primary absolute bottom center"&gt;
-Break!
-&lt;/h3&gt;
-
-&lt;p class='primary absolute white' style='bottom:2rem;'&gt;
-See you in 5 minutes.
-&lt;/p&gt;
 
 ---
 class: break center middle
@@ -378,19 +384,54 @@ class: header_background
 
 # Intro
 
+- Develop a simple app utilizing a cutting edge web template (Framework7). 
+- This app will consist in:
+  - A JS powered select input controlling a variable.
+  - A visualization powered by `{ggplot2}` 
+  - Homework: replace `{ggplot2}` by JS driven visualization. 
+  
+.center[
+&lt;img src="assets/img/undraw_working_remotely_jh40.svg" width="50%" /&gt;
+]
+
 ---
-class: break center middle
-background-image: url('assets/img/bg/f7.png')
-background-size: cover
 
-&lt;h3 class="primary absolute bottom center"&gt;
-Framework 7
-&lt;/h3&gt;
+# Scaffold Framework7 🚀🚀🚀
+
+.pull-left[
+We call:
+
+```r
+packer::scaffold_golem(framework7 = TRUE)
+```
+
+Sets a Framework7 compatible structure for `{golem}`:
+  - Install __npm__ dependencies.
+  - JS assets folder `srcjs`.
+  - __Loaders__ for CSS, JS, JSX ...
+  - Config for __webpack__.
+  - So that you don't have to worry too much.
+]
+
+.pull-right[
+&lt;img src="assets/img/packer-f7-scaffold.png" width="100%" /&gt;
+]
+
 
 ---
-class: header_background
 
-# Intro
+# Test it 🥼
+
+This is a very basic app but it works well.
+
+```r
+packer::bundle()
+devtools::load_all()
+run_app()
+```
+
+Bad new ... this is time for the ... 
+
 
 ---
 class: break center middle
@@ -405,19 +446,872 @@ Break!
 See you in 5 minutes.
 &lt;/p&gt;
 
+
 ---
 class: break center middle
-background-image: url('assets/img/bg/echarts.png')
+background-image: url('assets/img/bg/f7.png')
 background-size: cover
 
 &lt;h3 class="primary absolute bottom center"&gt;
-Echarts.js
+Framework 7
 &lt;/h3&gt;
 
 ---
 class: header_background
 
 # Intro
+
+&lt;br&gt;
+
+.pull-left[
+- First class __mobile__ template for the web.
+- __Native__ look and feel for iOS and Android
+- Progressive web app (PWA) support.
+- ... also works for desktop apps 😏
+]
+
+.pull-right[
+&lt;img src="assets/img/framework7.svg" width="100%" /&gt;
+]
+
+
+---
+
+.pull-left[
+&lt;div class="md-iphone-5 md-black-device" id="singleLayoutDemo" style="font-size: 0.5em; margin-top: 20px; !important;"&gt;
+&lt;div class="md-body"&gt;
+&lt;div class="md-buttons"&gt;&lt;/div&gt;
+&lt;div class="md-front-camera"&gt;&lt;/div&gt;
+&lt;div class="md-top-speaker"&gt;&lt;/div&gt;
+&lt;div class="md-screen"&gt;
+&lt;iframe width="100%" src="https://framework7.io/kitchen-sink/core/?theme=ios" allowfullscreen="" frameborder="0" scrolling="no" height="470px"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;button class="md-home-button"&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+]
+
+.pull-right[
+&lt;div class="md-iphone-5 md-white-device" id="tabLayoutDemo" style="font-size: 0.5em; margin-top: 20px; !important;"&gt;
+&lt;div class="md-body"&gt;
+&lt;div class="md-buttons"&gt;&lt;/div&gt;
+&lt;div class="md-front-camera"&gt;&lt;/div&gt;
+&lt;div class="md-top-speaker"&gt;&lt;/div&gt;
+&lt;div class="md-screen"&gt;
+&lt;iframe width="100%" src="https://appstore-f7-react.vercel.app/" allowfullscreen="" frameborder="0" scrolling="no" height="465px"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;button class="md-home-button"&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+]
+
+---
+
+# Import Framework7 and CSS 👩‍🏫
+
+Inside the main `srcjs/framework7.js`.
+
+.pull-left[
+- Notice how CSS is imported.
+- Requires style/css loaders.
+- __Modular__ approach: import only what is required.
+- __Lighter__ JS bundle.
+- __Faster__ app.
+]
+
+.small.pull-right[
+```js
+// Import Framework7
+import Framework7 from 'framework7';
+// Import Framework7 Styles
+import 'framework7/framework7-bundle.min.css';
+```
+]
+
+
+---
+
+# Layout basics 👩‍🏫
+
+This part is handled by __app_ui.R__. 
+
+.pull-left[
+Framework7 requires an `index.html` script:
+- `&lt;div id="app"&gt;&lt;/div&gt;` is the app __root__ required for initialization.
+- `index.js` the script generated with `{packer}` after bundling.
+- `golem_add_external_resources()` fills the `&lt;!-- Head content ... --&gt;` .
+]
+
+.small.pull-right[
+```html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- Head content ... --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- App root element ... --&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+  
+    &lt;!-- Path to Framework7 JS--&gt;
+    &lt;script type="text/javascript" src="www/index.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+]
+
+---
+
+# App template 👩‍🏫
+
+.pull-left[
+The simplest Framework7 [layout](https://framework7.io/docs/app-layout.html) is composed of:
+- The __app__ wrapper with __unique id__ required for initialization.
+- A single __auto-initialized__ view.
+- A page with: 
+  - navbar (top).
+  - toolbar (bottom).
+  - page content (middle).
+]
+
+.small.pull-right[
+```html
+&lt;div id="app"&gt;
+  &lt;div class="view view-main view-init safe-areas"&gt;
+    &lt;div class="page"&gt;
+      &lt;!-- navbar --&gt;
+      &lt;!-- toolbar --&gt;
+      &lt;div class="page-content"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+]
+
+---
+ 
+# HTML + JS: welcome JSX 👩‍🏫
+
+__Combine__ HTML and JavaScript code in the same file.
+
+.small.pull-left[
+### Without JSX
+```html
+&lt;template&gt;
+  &lt;div class="title" innerHTML=${title}&gt;&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default (props) =&gt; {
+    const title = 'Hello World';
+
+    return $render;
+  }
+&lt;/script&gt;
+```
+
+👎 Difficult to manage.
+]
+
+.small.pull-right[
+### With JSX
+```jsx
+export default () =&gt; {
+  const title = 'Hello World';
+
+  return () =&gt; (
+    &lt;div class="title"&gt;{title}&lt;/div&gt;
+  )
+}
+```
+
+👍 easy to manage.
+]
+
+
+---
+
+# About Framework7 components 👩‍🏫
+
+.pull-left[
+- [Components](https://framework7.io/docs/router-component.html#component-function) have 2 default parameters:
+  - __props__ gather all passed __attributes__.
+  - __context__ provides access to:
+    - The app instance `$f7`.
+    - More [here](https://framework7.io/docs/router-component.html#component-context).
+- Components:
+  - must return a __render__ function. 
+  - can be self-closed.
+]
+
+.small.pull-right[
+```html
+&lt;Component user="David" id="compo"/&gt;
+```
+
+```jsx
+const Component = (props, context) {
+  const greetings = 'Hello ' + props.user;
+  
+  // render function
+  return () =&gt; (
+    &lt;h1&gt;{greetings}&lt;/h1&gt;
+  )
+}
+```
+]
+
+---
+
+# Main app component 👩‍🏫
+
+`{packer}` created `app.f7.jsx`.
+
+.pull-left[
+- The whole app can be a [component](https://framework7.io/docs/router-component.html#main-app-component)!
+- Very similar to other tools like [React](https://en.reactjs.org/) or [Vue](https://vuejs.org/).
+] 
+
+.xsmall.pull-right[
+```jsx
+export default (props, { $f7 }) =&gt; {
+  const title = 'Hello World';
+  
+  return () =&gt; (
+    &lt;div id="app"&gt;
+      &lt;div class="view view-main view-init safe-areas"&gt;
+        &lt;div class="page"&gt;
+          &lt;!-- navbar ... --&gt;
+          &lt;!-- toolbar ... --&gt;
+          &lt;div class="page-content"&gt;
+            &lt;div class="block strong"&gt;
+              Page Content
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+```
+]
+
+
+---
+
+# Initialize App instance 👩‍🏫
+
+The remaining of `srcjs/framework7.js`:
+
+.pull-left[
+- Initializes the app instance:
+  - Targets __app__ id.
+  - Sets custom theme.
+  - Plugs the App component in the __component__ slot.
+  - Many other options available ...
+]
+
+.pull-right[
+```js
+// ... Other imports ...
+
+import App from './components/app.f7.jsx';
+let app = new Framework7({
+  el: '#app',
+  theme: 'ios',
+  // specify main app component
+  component: App
+});
+```
+]
+
+---
+
+# Customize app: your turn 🥼
+
+- Within `let app = new Framework7({ ... })`:
+  - Change the __theme__ to `md` (see [doc](https://framework7.io/docs/app.html#app-parameters)). 
+
+- In `.R/app_ui.R`:
+  - Add `theme-dark` class to the `body` tag.
+  - Add `color-theme-***`, where `***` is a color from [here](https://framework7.io/docs/color-themes.html#colors).
+
+---
+
+# About the Framework7 smartSelect 👩‍🏫
+
+It's time to add an extra component.
+
+.pull-left[
+- Improved `selectInput()`.
+- Triggered by `a` element.
+- `select` contains multiple `option` tags.
+- `select` is followed by a label tag.
+]
+
+
+.xsmall.pull-right[
+```html
+&lt;div class="list"&gt;
+  &lt;ul&gt;
+    &lt;!-- Smart select item --&gt;
+    &lt;li&gt;
+      &lt;!-- Additional "smart-select" class --&gt;
+      &lt;a href="#" class="item-link smart-select"&gt;
+        &lt;!-- select --&gt;
+        &lt;select name="fruits"&gt;
+          &lt;option value="apple" selected&gt;Apple&lt;/option&gt;
+          ...
+        &lt;/select&gt;
+        &lt;!-- Select label --&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+```
+]
+
+
+---
+
+# Widget element (1/5): your turn 🥼
+
+.pull-left[
+- Open `srcjs/framework7.js`.
+- Between CSS import and the app initialization, add the following code.
+- We also import `Sheet` since smartSelect needs it to open. 
+]
+
+.pull-right[
+```js
+// Install F7 Components using .use() method on class:
+import Sheet from 'framework7/esm/components/sheet/sheet.js';
+import smartSelect from 'framework7/esm/components/smart-select/smart-select.js';
+Framework7.use([Sheet, smartSelect]);
+```
+]
+
+---
+
+# Widget element (2/5): your turn 🥼
+
+.pull-left[
+- Create a new `./srcjs/components/widget.f7.jsx` component.
+- Copy the preliminary code. 
+- Import it in the main app component.
+- Replace __ID__ and __LABEL__ by the relevant __props__ elements.
+- Don't change `data-open-in="sheet"`.
+]
+
+.xsmall.pull-right[
+```jsx
+export default (props, { $f7 }) =&gt; {
+
+  return () =&gt; (
+    &lt;div class="list"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;a 
+            class="item-link smart-select smart-select-init" 
+            id=ID 
+            data-open-in="sheet"&gt;
+            &lt;select name=ID&gt;
+              
+            &lt;/select&gt;
+            &lt;div class="item-content"&gt;
+              &lt;div class="item-inner"&gt;
+                &lt;div class="item-title"&gt;LABEL&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}
+```
+]
+
+
+---
+
+# Widget element (3/5): your turn 🥼
+
+Let's add some `&lt;option&gt;` to the `&lt;select&gt;` tag...
+
+.pull-left[
+- Create a `names` array containing `wt`, `hp` and `qsec` strings.
+- Map over each array element to build an `&lt;option&gt;` array.
+- Fill in the `___`.
+- Add the newly created elements to `&lt;select&gt;`.
+]
+
+.xsmall.pull-right[
+```jsx
+const names = [___];
+const selectOptions = ___.map(
+  (name) =&gt; {
+    let isSelected = name === 'wt'? true: false;
+    return(
+      &lt;option 
+        key={___} 
+        value={___} 
+        selected={___}&gt;
+        {___}
+      &lt;/option&gt;
+    );
+  }
+)
+```
+
+```jsx
+&lt;select name=ID&gt;
+  {___}
+&lt;/select&gt;
+```
+]
+
+
+---
+
+# Widget element (4/5): your turn 🥼
+
+Let's send the selected value to Shiny.
+
+.small.pull-left[
+- Create `getSelectValue`: 
+  - Give it an __id__ parameter.
+  - Smart select __instance__ is recovered with `$f7.smartSelect.get()` method.
+  - Smart select value obtained with `instance.getValue()`.
+  - Call the relevant Shiny JS method to set the input value.
+  
+- In the render function:
+  -  Add an `onChange` prop to the `&lt;a&gt;` element. 
+  - Inside `onChange`, call `getSelectValue` with relevant __ID__ parameter.
+  - Sends it to Shiny with `Shiny.setInputValue`. 
+]
+
+.small.pull-right[
+```jsx
+export default (props, { $f7 }) =&gt; {
+  // Recover select value
+  const getSelectValue = (id) =&gt; {
+    let select = $f7.smartSelect.get('#' + ___);
+    Shiny.___(___, select.getValue());
+  };
+  
+  return () =&gt; (...)
+}
+```
+
+```jsx
+&lt;a 
+  class="item-link smart-select smart-select-init" 
+  onChange={() =&gt; ___(ID)} 
+  id=ID 
+  data-open-in="sheet"&gt;
+  ... // ommitted since unchanged
+&lt;/a&gt;
+```
+]
+
+
+---
+
+# Test it 🥼
+
+.pull-left[
+- Open `.R/app_server.R`.
+- Add this code, replacing __ID__ by what you chose JS side.
+- Input does not have initial value...
+]
+
+.pull-right[
+```r
+observeEvent(input$&lt;ID&gt;, {
+  message(sprintf("Slider value: %s", input$&lt;ID&gt;))
+})
+```
+
+```r
+packer::bundle()
+devtools::load_all()
+run_app()
+```
+]
+
+
+---
+
+# Widget element (5/5): your turn 🥼
+
+Give an initial value for Shiny.
+
+.pull-left[
+- Inside, `srcjs/components/widget.f7.jsx`.
+- Create the `initializeWidget` helper (outside the widget component).
+- Fill in the `___`.
+- Call it before the render function.
+]
+
+.small.pull-right[
+```js
+const initializeWidget = (id) =&gt; {
+  $(document).on('shiny:connected', () =&gt; {
+    // initial value
+    Shiny.___(
+      ___, 
+      $('#' + id + ' select').val(), 
+      {priority: 'event'}
+    );
+  });
+}
+```
+]
+
+
+---
+
+# Test it 🥼
+
+```r
+packer::bundle()
+devtools::load_all()
+run_app()
+```
+
+ 🏆 Congrats! You designed your first component. Let's 
+ improve it by adding some R logic. 
+
+
+---
+class: break center middle
+background-image: url('assets/img/bg/break.png')
+background-size: cover
+
+&lt;h3 class="primary absolute bottom center"&gt;
+Break!
+&lt;/h3&gt;
+
+&lt;p class='primary absolute white' style='bottom:2rem;'&gt;
+See you in 5 minutes.
+&lt;/p&gt;
+
+
+---
+class: break center middle
+background-image: url('assets/img/bg/model.png')
+background-size: cover
+
+&lt;h3 class="primary absolute bottom center"&gt;
+R Model
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+- Simple regression model with the `mtcars` dataset and `{ggplot2}`.
+- One variable is selected from JS with newly designed custom widget.
+- Formula `lm(mpg ~ input$var, mtcars)`.
+
+
+---
+
+# R business logic: your turn 🥼
+
+.pull-left[
+- Open `.R/app_server.R`.
+- Fill in the `___` and `...`.
+]
+
+.pull-right[
+```r
+output$plot &lt;- renderPlot({
+  ggplot(
+    data = ___,
+    mapping = aes(x = mpg, y = .data[[___]])
+  ) + 
+    geom_...() + 
+    geom_smooth()
+})
+```
+]
+
+That's all folks!
+
+
+---
+
+# Insert the plot 🥼
+
+
+.pull-left[
+- `output$plot` works by pair with `renderPlot("plot")` ...
+- but ... we can't insert the plot as R code inside `app_ui.R`.
+- Don't forget that Shiny is just creating HTML from R.
+]
+
+.pull-right[
+In the R console, run:
+
+```r
+renderPlot("plot")
+```
+
+which yields:
+
+```html
+&lt;div id="id" class="shiny-plot-output" style="width:100%;height:400px;"&gt;&lt;/div&gt;
+```
+
+Insert this in `./srcjs/components/app.f7.jsx`. 
+]
+
+
+---
+
+# Improve the design 🥼
+
+- Explore the Framework7 __card__ container [documentation](https://framework7.io/docs/cards.html).
+- Include the previous plot in the container of your choice.
+- Recompile the JS code and run the app. 
+
+.center[
+&lt;img src="assets/img/undraw_design_stats_ne2k.svg" width="40%" /&gt;
+]
+
+---
+class: break center middle
+background-image: url('assets/img/bg/echarts.png')
+background-size: cover
+
+&lt;h3 class="primary absolute bottom center"&gt;
+Homework: Echarts.js
+&lt;/h3&gt;
+
+---
+class: header_background
+
+# Intro
+
+- Replace the previous `{ggplot2}` chart by JS code.
+- We'll have to send data from R to JS.
+
+Communication done through the __websocket__.
+
+.pull-left[
+- R side:
+  - **`sendCustomMessage`** sends R messages to JS.
+
+- JS side:
+  - `Shiny.addCustomMessageHandler` receives message from `session$sendCustomMessage`.
+Both are linked by the **type** parameter
+]
+
+.pull-right[
+&lt;img src="assets/img/shiny-custom-message.png" width="100%" /&gt;
+]
+
+
+
+---
+
+# echarts assets
+
+.pull-left[
+- Install echarts and echarts-gl.
+- Import JS assets in `srcjs/components/widget.f7.jsx`.
+- Review the echarts [documentation](https://echarts.apache.org/examples/en/index.html).
+]
+
+
+.pull-right[
+```r
+packer::npm_install(
+  c(
+    "echarts", 
+    "echarts-gl"
+  ),
+  scope = "prod"
+)
+```
+```js
+// Import plotting library
+import * as echarts from 'echarts';
+import 'echarts-gl';
+```
+]
+
+
+
+
+---
+
+# echarts plotting strategy
+
+.pull-left[
+- Create a DOM container for the plot.
+- Initialize the plot container.
+- Set plot options.
+- Update plot instance.
+]
+
+.xsmall.pull-right[
+```html
+&lt;div id="plot" style="width:100%; min-height:400px;"&gt;&lt;/div&gt;
+```
+
+```js
+let chart = echarts.init(document.getElementById('plot'));
+myChartOptions = {
+  title: { text: 'Plot title' },
+  legend: { data:[...] },
+  xAxis: { data: ...},
+  yAxis: { type: ... },
+  series: [
+    {
+      name: ...,
+      type: ...,
+      data: ...
+    },
+    // other data
+  ]
+};
+myChart.setOption(myChartOptions);
+```
+]
+
+
+---
+
+# Process R data
+
+.pull-left[
+- Create a new `.R/process.R` script.
+- `process_data()` selects the relevant column based on a given parameter.
+- Fill in the `___`.
+]
+
+.small.pull-right[
+```r
+process_data &lt;- function(parm, session = shiny::getDefaultReactiveDomain()) {
+  
+  data_subset &lt;- list(mtcars$mpg, mtcars[[___]])
+  names(data_subset) &lt;- c("mpg", parm)
+  
+  processed_data &lt;- list(
+    data = ___,
+    var = ___
+  )
+  
+  session$sendCustomMessage("model_data", ___)
+}
+```
+]
+
+
+---
+
+# Add Shiny
+
+.pull-left[
+- In `.R/app_server.R`, add an `observeEvent()` to trigger `process_data()` based
+on the select input value (JS side).
+- Comment out the old `{ggplot2}` code. 
+- In `.srcjs/components/app.f7.jx`, remove the `shiny-plot-output` class from the plot container. 
+]
+
+
+.pull-right[
+```r
+observeEvent(___, {
+  ___(___)
+})
+```
+]
+
+---
+
+# Recover R data (1/3)
+
+.pull-left[
+- Open `srcjs/components/widget.f7.jsx`.
+- Inside `initializeWidget` function:
+  - Within the `shiny:connected` event listener, initialize the echarts plot instance.
+  - Copy and paste the resize event to handle plot resize.
+]
+
+.small.pull-right[
+```js
+let plot;
+$(document).on('shiny:connected', () =&gt; {
+  // initial value
+  
+  // prepare echarts plot
+  plot = echarts.___(document.getElementById(___));
+});
+
+// Resize event
+$(window).on('resize', function() {
+  plot.resize();
+});
+```
+]
+
+---
+
+# Recover R data (2/3)
+
+.pull-left[
+- Add `Shiny.addCustomMessageHandler` to capture the message sent from R.
+- A R list translates into a JS object.
+- Fill in the `___`.
+]
+
+
+.pull-right[
+```js
+let plotOptions, p, data;
+Shiny.addCustomMessageHandler(___, (___) =&gt; {
+  p = message.var;
+  data = message.___;
+  
+});
+```
+]
+
+---
+
+# Recover R data (3/3)
+
+.pull-left[
+- In the same message handler, set plot options.
+- Apply options to the plot instance.
+- Fill in the `___`.
+]
+
+
+.small.pull-right[
+```js
+plotOptions = {
+  title: { text: 'Plot' },
+  tooltip: {},
+  legend: { data:['mpg', p] },
+  xAxis: { data: message.data[___] },
+  yAxis: { type: 'value' },
+  series: [
+    {
+      name: p,
+      type: 'scatter',
+      data: message.data[___]
+    }
+  ]
+}
+
+___.setOption(___);
+```
+]
 
 ---
 class: break center middle
@@ -427,6 +1321,11 @@ background-size: cover
 &lt;h3 class="primary absolute bottom center"&gt;
 Questions?
 &lt;/h3&gt;
+
+---
+class: break center middle
+background-image: url('assets/img/bg/undraw_winners_ao2o.svg')
+background-size: cover
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -322,3 +322,11 @@ table.dataTable.display tbody tr:hover {
 .small{
   font-size: 1em;
 }
+
+.xsmall{
+  font-size: .6em;
+}
+
+.xxsmall{
+  font-size: .4em;
+}
