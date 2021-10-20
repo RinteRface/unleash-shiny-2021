@@ -644,6 +644,21 @@ export default () => {
 
 ---
 
+# JSX in RStudio ⚠️
+
+- RStudio is not a web development oriented IDE.
+- JSX appears as text file.
+- You may change it to JavaScript.
+
+.center[
+```{r rstudio-js-highlight, echo = FALSE, out.width='50%'}
+knitr::include_graphics("assets/img/rstudio-js-highlight.png")
+```
+]
+
+
+---
+
 # About Framework7 components 👩‍🏫
 
 .pull-left[
