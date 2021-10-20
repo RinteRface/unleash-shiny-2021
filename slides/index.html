@@ -364,7 +364,7 @@ _The term "scaffold" was blatantly stolen from `htmlwidgets::scaffoldWidget`._
 
 # Bundle?
 
-Source code is written in `/srcjs` and is bundled to `/inst`
+Source code is written in `./srcjs` and is bundled to `./inst`
 
 ```r
 packer::bundle()
@@ -407,7 +407,7 @@ packer::scaffold_golem(framework7 = TRUE)
 
 Sets a Framework7 compatible structure for `{golem}`:
   - Install __npm__ dependencies.
-  - JS assets folder `srcjs`.
+  - JS assets folder `./srcjs`.
   - __Loaders__ for CSS, JS, JSX ...
   - Config for __webpack__.
   - So that you don't have to worry too much.
@@ -509,7 +509,7 @@ class: header_background
 
 # Import Framework7 and CSS 👩‍🏫
 
-Inside the main `srcjs/framework7.js`.
+Inside the main `./srcjs/index.js`.
 
 .pull-left[
 - Notice how CSS is imported.
@@ -713,7 +713,7 @@ export default (props, { $f7 }) =&gt; {
 
 # Initialize App instance 👩‍🏫
 
-The remaining of `srcjs/framework7.js`:
+The remaining of `./srcjs/index.js`:
 
 .pull-left[
 - Initializes the app instance:
@@ -744,7 +744,7 @@ let app = new Framework7({
 - Within `let app = new Framework7({ ... })`:
   - Change the __theme__ to `md` (see [doc](https://framework7.io/docs/app.html#app-parameters)). 
 
-- In `.R/app_ui.R`:
+- In `./R/app_ui.R`:
   - Add `theme-dark` class to the `body` tag.
   - Add `color-theme-***`, where `***` is a color from [here](https://framework7.io/docs/color-themes.html#colors).
 
@@ -789,7 +789,7 @@ It's time to add an extra component.
 # Widget element (1/5): your turn 🥼
 
 .pull-left[
-- Open `srcjs/framework7.js`.
+- Open `.srcjs/index.js`.
 - Between CSS import and the app initialization, add the following code.
 - We also import `Sheet` since smartSelect needs it to open. 
 ]
@@ -933,7 +933,7 @@ export default (props, { $f7 }) =&gt; {
 # Test it 🥼
 
 .pull-left[
-- Open `.R/app_server.R`.
+- Open `./R/app_server.R`.
 - Add this code, replacing __ID__ by what you chose JS side.
 - Input does not have initial value...
 ]
@@ -960,7 +960,7 @@ run_app()
 Give an initial value for Shiny.
 
 .pull-left[
-- Inside, `srcjs/components/widget.f7.jsx`.
+- Inside, `./srcjs/components/widget.f7.jsx`.
 - Create the `initializeWidget` helper (outside the widget component).
 - Fill in the `___`.
 - Call it before the render function.
@@ -1034,7 +1034,7 @@ class: header_background
 # R business logic: your turn 🥼
 
 .pull-left[
-- Open `.R/app_server.R`.
+- Open `./R/app_server.R`.
 - Fill in the `___` and `...`.
 ]
 
@@ -1134,7 +1134,7 @@ Both are linked by the **type** parameter
 
 .pull-left[
 - Install echarts and echarts-gl.
-- Import JS assets in `srcjs/components/widget.f7.jsx`.
+- Import JS assets in `./srcjs/components/widget.f7.jsx`.
 - Review the echarts [documentation](https://echarts.apache.org/examples/en/index.html).
 ]
 
@@ -1201,7 +1201,7 @@ myChart.setOption(myChartOptions);
 # Process R data
 
 .pull-left[
-- Create a new `.R/process.R` script.
+- Create a new `./R/process.R` script.
 - `process_data()` selects the relevant column based on a given parameter.
 - Fill in the `___`.
 ]
@@ -1229,10 +1229,10 @@ process_data &lt;- function(parm, session = shiny::getDefaultReactiveDomain()) {
 # Add Shiny
 
 .pull-left[
-- In `.R/app_server.R`, add an `observeEvent()` to trigger `process_data()` based
+- In `./R/app_server.R`, add an `observeEvent()` to trigger `process_data()` based
 on the select input value (JS side).
 - Comment out the old `{ggplot2}` code. 
-- In `.srcjs/components/app.f7.jx`, remove the `shiny-plot-output` class from the plot container. 
+- In `./srcjs/components/app.f7.jx`, remove the `shiny-plot-output` class from the plot container. 
 ]
 
 
@@ -1249,7 +1249,7 @@ observeEvent(___, {
 # Recover R data (1/3)
 
 .pull-left[
-- Open `srcjs/components/widget.f7.jsx`.
+- Open `./srcjs/components/widget.f7.jsx`.
 - Inside `initializeWidget` function:
   - Within the `shiny:connected` event listener, initialize the echarts plot instance.
   - Copy and paste the resize event to handle plot resize.
