@@ -42,6 +42,7 @@ xaringanExtra::use_extra_styles(
   mute_unhighlighted_code = TRUE  #<<
 )
 xaringanExtra::use_panelset()
+xaringanExtra::use_fit_screen()
 
 html_2_R <- charpente::html_2_R
 ```
