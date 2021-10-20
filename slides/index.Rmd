@@ -101,7 +101,7 @@ We're in for 2 hours of **fun**!
 
 Clone this repository with the RStudio IDE or via the command line.
 
-```shell
+```bash
 git clone https://github.com/RinteRface/unleash-shiny-2021.git
 cd unleash-shiny-2021
 ```
@@ -110,8 +110,8 @@ Then run `renv::restore()` to install the dependencies.
 
 Importantly, this workshop makes heavy use of npm (Node's Package Manager), it comes with the installation of node.js:
 
-- You can manually install node.js: nodejs.org/en/download/.
-- You can also use package managers: nodejs.org/en/download/package-manager/.
+- You can manually install node.js: [nodejs.org/en/download/](nodejs.org/en/download/).
+- You can also use package managers: [nodejs.org/en/download/package-manager/](nodejs.org/en/download/package-manager/).
 
 ---
 class: break center middle
