@@ -786,10 +786,10 @@ It's time to add an extra component.
 
 ---
 
-# Widget element (1/5): your turn 🥼
+# Widget element (1/6): your turn 🥼
 
 .pull-left[
-- Open `.srcjs/index.js`.
+- Open `./srcjs/index.js`.
 - Between CSS import and the app initialization, add the following code.
 - We also import `Sheet` since smartSelect needs it to open. 
 ]
@@ -805,12 +805,11 @@ Framework7.use([Sheet, smartSelect]);
 
 ---
 
-# Widget element (2/5): your turn 🥼
+# Widget element (2/6): your turn 🥼
 
 .pull-left[
 - Create a new `./srcjs/components/widget.f7.jsx` component.
 - Copy the preliminary code. 
-- Import it in the main app component.
 - Replace __ID__ and __LABEL__ by the relevant __props__ elements.
 - Don't change `data-open-in="sheet"`.
 ]
@@ -844,10 +843,38 @@ export default (props, { $f7 }) =&gt; {
 ```
 ]
 
+---
+
+# Widget element (3/6): your turn 🥼
+
+.pull-left[
+- Import it in the main app component.
+- Don't forget that `widget.f7.jsx` and `app.f7.jsx` are in the same folder.
+- Fill in the `___`.
+]
+
+.small.pull-right[
+```jsx
+// Inside ./srcjs/components/app.f7.jsx
+import ___ from '___';
+
+export default (props, { $f7 }) =&gt; {
+  
+  // code omitted ...
+  
+  return () =&gt; (
+    &lt;div id="app"&gt;
+      ...
+    &lt;/div&gt;
+  )
+}
+```
+]
+
 
 ---
 
-# Widget element (3/5): your turn 🥼
+# Widget element (4/6): your turn 🥼
 
 Let's add some `&lt;option&gt;` to the `&lt;select&gt;` tag...
 
@@ -860,6 +887,9 @@ Let's add some `&lt;option&gt;` to the `&lt;select&gt;` tag...
 
 .xsmall.pull-right[
 ```jsx
+// Inside ./srcjs/components/widget.f7.jsx
+export default (props, { $f7 }) =&gt; {
+
 const names = [___];
 const selectOptions = ___.map(
   (name) =&gt; {
@@ -874,19 +904,21 @@ const selectOptions = ___.map(
     );
   }
 )
-```
 
-```jsx
-&lt;select name=ID&gt;
-  {___}
-&lt;/select&gt;
+return () =&gt; (
+  // other tags are not shown
+  &lt;select name=ID&gt;
+    {___}
+  &lt;/select&gt;
+)
+}
 ```
 ]
 
 
 ---
 
-# Widget element (4/5): your turn 🥼
+# Widget element (5/6): your turn 🥼
 
 Let's send the selected value to Shiny.
 
@@ -903,27 +935,30 @@ Let's send the selected value to Shiny.
   - Sends it to Shiny with `Shiny.setInputValue`. 
 ]
 
-.small.pull-right[
+.xsmall.pull-right[
 ```jsx
+// Inside ./srcjs/components/widget.f7.jsx
 export default (props, { $f7 }) =&gt; {
+  
+  // ... code from previous step ...
+
   // Recover select value
   const getSelectValue = (id) =&gt; {
     let select = $f7.smartSelect.get('#' + ___);
     Shiny.___(___, select.getValue());
   };
   
-  return () =&gt; (...)
+  return () =&gt; (
+  // Other tags are not shown
+   &lt;a 
+    class="item-link smart-select smart-select-init" 
+    onChange={() =&gt; ___(ID)} 
+    id=ID 
+    data-open-in="sheet"&gt;
+    ... // ommitted since unchanged
+  &lt;/a&gt;
+  )
 }
-```
-
-```jsx
-&lt;a 
-  class="item-link smart-select smart-select-init" 
-  onChange={() =&gt; ___(ID)} 
-  id=ID 
-  data-open-in="sheet"&gt;
-  ... // ommitted since unchanged
-&lt;/a&gt;
 ```
 ]
 
@@ -955,7 +990,7 @@ run_app()
 
 ---
 
-# Widget element (5/5): your turn 🥼
+# Widget element (6/6): your turn 🥼
 
 Give an initial value for Shiny.
 
@@ -966,8 +1001,8 @@ Give an initial value for Shiny.
 - Call it before the render function.
 ]
 
-.small.pull-right[
-```js
+.xsmall.pull-right[
+```jsx
 const initializeWidget = (id) =&gt; {
   $(document).on('shiny:connected', () =&gt; {
     // initial value
@@ -977,6 +1012,16 @@ const initializeWidget = (id) =&gt; {
       {priority: 'event'}
     );
   });
+}
+
+// Inside ./srcjs/components/widget.f7.jsx
+export default (props, { $f7 }) =&gt; {
+  
+  // ... code from previous steps ...
+
+  initializeWidget(props.id);
+
+  return () =&gt; (...)
 }
 ```
 ]
