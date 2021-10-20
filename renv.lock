@@ -491,15 +491,15 @@
     },
     "packer": {
       "Package": "packer",
-      "Version": "0.1.2.9002",
+      "Version": "0.1.2.9003",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "packer",
       "RemoteUsername": "JohnCoene",
       "RemoteRef": "HEAD",
-      "RemoteSha": "9a1ed41543ce7a036c29a090a12741de026724a7",
-      "Hash": "9d0a33832ada21f8cde51d2f0408eeb4"
+      "RemoteSha": "7b9e8592d505960613e58efab032596906a7460f",
+      "Hash": "b0dd27264113cd9f5ff6f0399d4a57ec"
     },
     "pillar": {
       "Package": "pillar",
