@@ -10,7 +10,12 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic 
     fluidPage(
-      h1("unleash.workshop")
+      h1("unleash.workshop"),
+      tags$iframe(
+        src = "https://rinpharma2021.rinterface.com",
+        width = "100%",
+        height = "500px"
+      )
     )
   )
 }
