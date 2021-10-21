@@ -35,14 +35,15 @@ Slides are hosted [here](https://rinterface.com/shiny/talks/RPharma2021/).
 
 ## Program
 
-1. Introduction 				5  min
-2. Bundling with packer 10 min
-3. R model 							5  min
-4. Project Setup 				30 min
-5. _Break_ 							5  min
-6. Framework 7 					30 min
-7. Echarts.js 					15 min
-8. Questions
+1. Introduction 				**5  min**
+2. Bundling with packer **15 min**
+3. Project Setup 				**10 min**
+4. _Break_ 							**5  min**
+5. Framework 7 					**60 min**
+6. _Break_ 							**5  min**
+7. R model 							**10  min**
+8. Echarts.js 					(Homework)
+9. Questions
 
 ## Resources
 
