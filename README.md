@@ -23,6 +23,15 @@ node.js.
 - You can also use package managers:
 [nodejs.org/en/download/package-manager/](https://nodejs.org/en/download/package-manager/)
 
+If you have restored the renv state and have nodejs installed 
+run the line below to check whether it is ready for the workshop.
+It will print helpful messages if it is not.
+
+```r
+packer::engine_check()
+
+```
+
 ## Slides
 
 Slides are hosted [here](https://rinpharma2021.rinterface.com/).
