@@ -1320,7 +1320,7 @@ observeEvent(___, {
 export default (props, { $f7 }) => {
   // ...
   
-  initializeWidget();
+  renderPlot();
 
   return () => (...)
 }
