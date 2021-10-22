@@ -25,7 +25,7 @@ node.js.
 
 ## Slides
 
-Slides are hosted [here](https://rinterface.com/shiny/talks/RPharma2021/).
+Slides are hosted [here](https://rinpharma2021.rinterface.com/).
 
 
 ## Requirements
