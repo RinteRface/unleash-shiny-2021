@@ -4,3 +4,7 @@
 ^dev$
 ^makefile$
 ^slides$
+^.*\.Rproj$
+^\.Rproj\.user$
+^app\.R$
+^rsconnect$
