@@ -797,6 +797,8 @@ It's time to add an extra component.
 
 .pull-right[
 ```js
+// ./srcjs/index.js
+
 // Install F7 Components using .use() method on class:
 import Sheet from 'framework7/esm/components/sheet/sheet.js';
 import smartSelect from 'framework7/esm/components/smart-select/smart-select.js';
@@ -817,6 +819,7 @@ Framework7.use([Sheet, smartSelect]);
 
 .xsmall.pull-right[
 ```jsx
+// ./srcjs/components/widget.f7.jsx
 export default (props, { $f7 }) =&gt; {
 
   return () =&gt; (
@@ -849,14 +852,14 @@ export default (props, { $f7 }) =&gt; {
 # Widget element (3/6): your turn 🥼
 
 .pull-left[
-- Import it in the main app component.
+- Import the widget in the main app component.
 - Don't forget that `widget.f7.jsx` and `app.f7.jsx` are in the same folder.
 - Fill in the `___`.
 ]
 
 .small.pull-right[
 ```jsx
-// Inside ./srcjs/components/app.f7.jsx
+// ./srcjs/components/app.f7.jsx
 import ___ from '___';
 
 export default (props, { $f7 }) =&gt; {
@@ -880,38 +883,43 @@ export default (props, { $f7 }) =&gt; {
 Let's add some `&lt;option&gt;` to the `&lt;select&gt;` tag...
 
 .pull-left[
-- Create a `names` array containing `wt`, `hp` and `qsec` strings.
-- Map over each array element to build an `&lt;option&gt;` array.
-- Fill in the `___`.
-- Add the newly created elements to `&lt;select&gt;`.
+1. Create select options:
+  - Create a `names` array containing `wt`, `hp` and `qsec` strings.
+  - Map over each array element to build an `&lt;option&gt;` array.
+2. Update render function:
+  - Add the newly created elements to `&lt;select&gt;`.
+  
+Fill in the `___`.
 ]
 
 .xsmall.pull-right[
 ```jsx
-// Inside ./srcjs/components/widget.f7.jsx
+// ./srcjs/components/widget.f7.jsx
 export default (props, { $f7 }) =&gt; {
 
-const names = [___];
-const selectOptions = ___.map(
-  (name) =&gt; {
-    let isSelected = name === 'wt'? true: false;
-    return(
-      &lt;option 
-        key={___} 
-        value={___} 
-        selected={___}&gt;
-        {___}
-      &lt;/option&gt;
-    );
-  }
-)
-
-return () =&gt; (
-  // other tags are not shown
-  &lt;select name=ID&gt;
-    {___}
-  &lt;/select&gt;
-)
+  // (1)
+  const names = [___];
+  const selectOptions = ___.map(
+    (name) =&gt; {
+      let isSelected = name === 'wt'? true: false;
+      return(
+        &lt;option 
+          key={___} 
+          value={___} 
+          selected={___}&gt;
+          {___}
+        &lt;/option&gt;
+      );
+    }
+  )
+  
+  // (2)
+  return () =&gt; (
+    // other tags are not shown
+    &lt;select name=ID&gt;
+      {___}
+    &lt;/select&gt;
+  )
 }
 ```
 ]
@@ -921,24 +929,19 @@ return () =&gt; (
 
 # Widget element (5/6): your turn 🥼
 
-Let's send the selected value to Shiny.
+Let's send the selected value to Shiny (1/2).
 
-.small.pull-left[
-- Create `getSelectValue`: 
+.pull-left[
+1. Create `getSelectValue`: 
   - Give it an __id__ parameter.
   - Smart select __instance__ is recovered with `$f7.smartSelect.get()` method.
   - Smart select value obtained with `instance.getValue()`.
   - Call the relevant Shiny JS method to set the input value.
-  
-- In the render function:
-  -  Add an `onChange` prop to the `&lt;a&gt;` element. 
-  - Inside `onChange`, call `getSelectValue` with relevant __ID__ parameter.
-  - Sends it to Shiny with `Shiny.setInputValue`. 
 ]
 
-.xsmall.pull-right[
+.small.pull-right[
 ```jsx
-// Inside ./srcjs/components/widget.f7.jsx
+// ./srcjs/components/widget.f7.jsx
 export default (props, { $f7 }) =&gt; {
   
   // ... code from previous step ...
@@ -949,6 +952,35 @@ export default (props, { $f7 }) =&gt; {
     Shiny.___(___, select.getValue());
   };
   
+  // render function
+  return () =&gt; (...)
+}
+```
+]
+
+
+---
+
+# Widget element (6/6): your turn 🥼
+
+Let's send the selected value to Shiny (2/2).
+
+.pull-left[
+2. In the component render function:
+  -  Add an `onChange` prop to the `&lt;a&gt;` element. 
+  - `onChange` triggered each time a new value is selected.
+  - Inside `onChange`, call `getSelectValue` with relevant __ID__ parameter.
+  - Sends it to Shiny with `Shiny.setInputValue`. 
+]
+
+.small.pull-right[
+```jsx
+// ./srcjs/components/widget.f7.jsx
+export default (props, { $f7 }) =&gt; {
+  
+  // ... code from previous step ...
+  
+  // render function
   return () =&gt; (
   // Other tags are not shown
    &lt;a 
@@ -964,6 +996,7 @@ export default (props, { $f7 }) =&gt; {
 ]
 
 
+
 ---
 
 # Test it 🥼
@@ -976,6 +1009,7 @@ export default (props, { $f7 }) =&gt; {
 
 .pull-right[
 ```r
+# Inside ./R/app_server.R
 observeEvent(input$&lt;ID&gt;, {
   message(sprintf("Slider value: %s", input$&lt;ID&gt;))
 })
@@ -985,45 +1019,6 @@ observeEvent(input$&lt;ID&gt;, {
 packer::bundle()
 devtools::load_all()
 run_app()
-```
-]
-
-
----
-
-# Widget element (6/6): your turn 🥼
-
-Give an initial value for Shiny.
-
-.pull-left[
-- Inside, `./srcjs/components/widget.f7.jsx`.
-- Create the `initializeWidget` helper (outside the widget component).
-- Fill in the `___`.
-- Call it before the render function.
-]
-
-.xsmall.pull-right[
-```jsx
-const initializeWidget = (id) =&gt; {
-  $(document).on('shiny:connected', () =&gt; {
-    // initial value
-    Shiny.___(
-      ___, 
-      $('#' + id + ' select').val(), 
-      {priority: 'event'}
-    );
-  });
-}
-
-// Inside ./srcjs/components/widget.f7.jsx
-export default (props, { $f7 }) =&gt; {
-  
-  // ... code from previous steps ...
-
-  initializeWidget(props.id);
-
-  return () =&gt; (...)
-}
 ```
 ]
 
@@ -1292,21 +1287,46 @@ observeEvent(___, {
 
 ---
 
-# Recover R data (1/3)
+# Recover R data (1/4)
 
 .pull-left[
-- Open `./srcjs/components/widget.f7.jsx`.
-- Inside `initializeWidget` function:
-  - Within the `shiny:connected` event listener, initialize the echarts plot instance.
+- Inside `./srcjs/components/widget.f7.jsx` create a new
+`renderPlot` function, right after the widget component.
+]
+
+.small.pull-right[
+```js
+// ./srcjs/components/widget.f7.jsx
+export default (props, { $f7 }) =&gt; {
+  // ...
+  
+  initializeWidget();
+
+  return () =&gt; (...)
+}
+
+const renderPlot = () =&gt; {
+  // JS logic
+}
+```
+]
+
+---
+
+# Recover R data (2/4)
+
+.pull-left[
+- Inside `renderPlot` function:
+  - Add `shiny:connected` event listener.
+  - Initialize the echarts plot instance.
   - Copy and paste the resize event to handle plot resize.
 ]
 
 .small.pull-right[
 ```js
+// ./srcjs/components/widget.f7.jsx
 let plot;
 $(document).on('shiny:connected', () =&gt; {
-  // initial value
-  
   // prepare echarts plot
   plot = echarts.___(document.getElementById(___));
 });
@@ -1320,7 +1340,7 @@ $(window).on('resize', function() {
 
 ---
 
-# Recover R data (2/3)
+# Recover R data (3/4)
 
 .pull-left[
 - Add `Shiny.addCustomMessageHandler` to capture the message sent from R.
@@ -1331,6 +1351,7 @@ $(window).on('resize', function() {
 
 .pull-right[
 ```js
+//./srcjs/components/widget.f7.jsx
 let plotOptions, p, data;
 Shiny.addCustomMessageHandler(___, (___) =&gt; {
   p = message.var;
@@ -1342,7 +1363,7 @@ Shiny.addCustomMessageHandler(___, (___) =&gt; {
 
 ---
 
-# Recover R data (3/3)
+# Recover R data (4/4)
 
 .pull-left[
 - In the same message handler, set plot options.
@@ -1353,6 +1374,7 @@ Shiny.addCustomMessageHandler(___, (___) =&gt; {
 
 .small.pull-right[
 ```js
+// ./srcjs/components/widget.f7.jsx
 plotOptions = {
   title: { text: 'Plot' },
   tooltip: {},
