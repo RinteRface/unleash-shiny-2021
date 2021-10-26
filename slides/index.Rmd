@@ -98,7 +98,7 @@ We're in for 2 hours of **fun**!
 
 # Workshop Material
 
-- Slides: [rinterface.com/shiny/talks/RPharma2021](https://rinterface.com/shiny/talks/RPharma2021)
+- Slides: [https://rinpharma2021.rinterface.com/](https://rinterface.com/shiny/talks/RPharma2021)
 
 Clone this repository with the RStudio IDE or via the command line.
 
