@@ -241,7 +241,7 @@ addOne(2);
 Loads faster but can't be written or read by a human.
 
 ```js
-function addOne(n){return n+1}addOne(2);
+functionaddOne(n){return n+1}addOne(2);
 ```
 ]
 
